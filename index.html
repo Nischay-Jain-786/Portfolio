@@ -1,0 +1,3420 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nischay Jain | Cybersecurity Enthusiast & Competitive Programmer</title>
+  <meta name="description" content="Official portfolio of Nischay Jain — B.Tech CS Student at Newton School of Technology, Competitive Programmer on Codeforces (insaneNischay), and Cybersecurity & CTF enthusiast.">
+  <meta name="keywords" content="Nischay Jain, Competitive Programming, Cybersecurity, CTF, Codeforces, Newton School of Technology, Portfolio">
+  <meta name="author" content="Nischay Jain">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="Nischay Jain — Cybersecurity & Competitive Programming">
+  <meta property="og:description" content="Portfolio of Nischay Jain: Algorithms, CTF problem solving, and software engineering.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+/* ==========================================================================
+   PORTFOLIO STYLESHEET - NISCHAY JAIN
+   Cybersecurity Enthusiast | Competitive Programmer
+   ========================================================================== */
+
+/* --------------------------------------------------
+   1. Root Variables & Theme Definition
+   -------------------------------------------------- */
+:root {
+  /* Color Palette */
+  --bg-dark: #070b14;
+  --bg-card: rgba(15, 23, 42, 0.72);
+  --bg-card-hover: rgba(24, 35, 61, 0.85);
+  --bg-card-subtle: rgba(13, 21, 39, 0.5);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-glass-bright: rgba(0, 240, 255, 0.35);
+
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  --accent-cyan: #00f0ff;
+  --accent-teal: #00e599;
+  --accent-blue: #38bdf8;
+  --accent-purple: #a855f7;
+  --accent-orange: #f97316;
+  --accent-pink: #f43f5e;
+
+  --grad-cyan-teal: linear-gradient(135deg, #00f0ff 0%, #00e599 100%);
+  --grad-blue-purple: linear-gradient(135deg, #38bdf8 0%, #a855f7 100%);
+  --grad-surface: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+
+  /* Typography */
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', "Courier New", monospace;
+
+  /* Elevation & Shadows */
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 25px -3px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.65);
+  --shadow-glow-cyan: 0 0 25px rgba(0, 240, 255, 0.25);
+  --shadow-glow-teal: 0 0 25px rgba(0, 229, 153, 0.25);
+
+  /* Transitions */
+  --trans-fast: 0.18s ease;
+  --trans-norm: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  --trans-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------
+   2. Reset & Global Base
+   -------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  font-size: 16px;
+  background-color: var(--bg-dark);
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--trans-fast), border-color var(--trans-fast);
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button, input {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Accessibility Focus States */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------
+   3. Ambient Glowing Background
+   -------------------------------------------------- */
+.glow-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.35;
+  will-change: transform;
+  animation: floatOrb 20s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+  top: -10%;
+  left: -5%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.22) 0%, transparent 70%);
+}
+
+.orb-2 {
+  top: 45%;
+  right: -10%;
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.18) 0%, transparent 70%);
+  animation-duration: 25s;
+  animation-direction: alternate-reverse;
+}
+
+.orb-3 {
+  bottom: -15%;
+  left: 20%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(0, 229, 153, 0.15) 0%, transparent 70%);
+  animation-duration: 22s;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, 30px) scale(1.08); }
+  100% { transform: translate(-30px, -20px) scale(0.95); }
+}
+
+/* --------------------------------------------------
+   4. Typography & Common Classes
+   -------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.gradient-text {
+  background: var(--grad-cyan-teal);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.section {
+  padding: 6.5rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 2.85rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-muted);
+  max-width: 650px;
+  margin-bottom: 3.5rem;
+  line-height: 1.6;
+}
+
+/* Glassmorphism Card Style */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  transition: transform var(--trans-norm), border-color var(--trans-norm), box-shadow var(--trans-norm);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+}
+
+.glass-card:hover {
+  border-color: rgba(0, 240, 255, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.6), var(--shadow-glow-cyan);
+}
+
+/* --------------------------------------------------
+   5. Buttons & Interactive Links
+   -------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.65rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.975rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--trans-norm);
+}
+
+.btn-primary {
+  background: var(--grad-cyan-teal);
+  color: #041019;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(0, 240, 255, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 240, 255, 0.45);
+  filter: brightness(1.05);
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(10px);
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.btn-sm {
+  padding: 0.55rem 1.1rem;
+  font-size: 0.875rem;
+  border-radius: 0.55rem;
+}
+
+.btn-lg {
+  padding: 1.1rem 2.25rem;
+  font-size: 1.05rem;
+  border-radius: 0.85rem;
+}
+
+/* --------------------------------------------------
+   6. Navigation Bar
+   -------------------------------------------------- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4.5rem;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  background: rgba(7, 11, 20, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-glass);
+  transition: all var(--trans-norm);
+}
+
+.navbar.scrolled {
+  background: rgba(7, 11, 20, 0.92);
+  height: 4rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.brand-code {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--accent-cyan);
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  padding: 0.25rem 0.55rem;
+  border-radius: 0.4rem;
+}
+
+.brand-name {
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.nav-link {
+  font-size: 0.925rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+  padding: 0.4rem 0;
+}
+
+.nav-link i {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.nav-link:hover {
+  color: var(--accent-cyan);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-cyan);
+  transition: width var(--trans-norm);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--border-glass);
+  color: var(--text-main);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+/* --------------------------------------------------
+   7. Hero Section
+   -------------------------------------------------- */
+.hero {
+  padding: 9rem 0 5rem;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(0, 229, 153, 0.08);
+  border: 1px solid rgba(0, 229, 153, 0.25);
+  color: var(--accent-teal);
+  font-family: var(--font-mono);
+  font-size: 0.825rem;
+  font-weight: 500;
+  padding: 0.4rem 0.95rem;
+  border-radius: 9999px;
+  margin-bottom: 1.5rem;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-teal);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-teal);
+  animation: pulseAnim 2s infinite;
+}
+
+@keyframes pulseAnim {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 229, 153, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 229, 153, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 229, 153, 0); }
+}
+
+.hero-title {
+  font-size: clamp(2.75rem, 5.5vw, 4.25rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  margin-bottom: 1.5rem;
+}
+
+.hero-description {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 580px;
+  margin-bottom: 2rem;
+}
+
+.hero-description strong {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.hero-social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.25rem;
+}
+
+.social-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  padding: 0.45rem 0.9rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  transition: all var(--trans-fast);
+}
+
+.social-badge:hover {
+  background: rgba(0, 240, 255, 0.1);
+  border-color: rgba(0, 240, 255, 0.3);
+  color: var(--accent-cyan);
+  transform: translateY(-2px);
+}
+
+.social-badge i {
+  font-size: 0.95rem;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1.15rem;
+  flex-wrap: wrap;
+}
+
+.hero-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  perspective: 1200px;
+  animation: float3D 7s ease-in-out infinite;
+}
+
+.hero-visual:hover {
+  animation-play-state: paused;
+}
+
+@keyframes float3D {
+  0%, 100% {
+    transform: perspective(1200px) translateY(0) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(1200px) translateY(-8px) rotateX(1.8deg) rotateY(-1.5deg);
+  }
+}
+
+/* --------------------------------------------------
+   3D Holographic Cyber Core Viewport
+   -------------------------------------------------- */
+.cyber-3d-hologram {
+  background: rgba(10, 16, 30, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 240, 255, 0.28);
+  border-radius: 1rem;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.75), 0 0 35px rgba(0, 240, 255, 0.16);
+  overflow: hidden;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color var(--trans-fast);
+}
+
+.cyber-3d-hologram:hover {
+  border-color: rgba(0, 240, 255, 0.55);
+  box-shadow: 0 25px 65px -10px rgba(0, 0, 0, 0.85), 0 0 50px rgba(0, 240, 255, 0.28);
+}
+
+.hologram-header {
+  background: rgba(14, 23, 42, 0.9);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.18);
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hologram-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--accent-cyan);
+}
+
+.holo-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan);
+  animation: pulseCyan 1.8s infinite;
+}
+
+@keyframes pulseCyan {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.7; }
+}
+
+.holo-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.holo-btn {
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  color: var(--accent-cyan);
+  padding: 0.25rem 0.55rem;
+  border-radius: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all var(--trans-fast);
+}
+
+.holo-btn:hover {
+  background: rgba(0, 240, 255, 0.22);
+  border-color: var(--accent-cyan);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.hologram-canvas-container {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  background: radial-gradient(circle at center, rgba(0, 240, 255, 0.08) 0%, rgba(7, 11, 20, 0.96) 80%);
+  cursor: grab;
+  overflow: hidden;
+}
+
+.hologram-canvas-container:active {
+  cursor: grabbing;
+}
+
+.hologram-canvas-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.hologram-overlay-data {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.75rem;
+}
+
+.holo-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.3rem;
+  background: rgba(7, 11, 20, 0.75);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-dim);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.holo-tag i {
+  color: var(--accent-cyan);
+}
+
+.holo-bottom-right {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+}
+
+.hologram-footer {
+  background: rgba(10, 16, 28, 0.92);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.45rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* Terminal Visual Card */
+.terminal-card {
+  background: #090e19;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1rem;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 240, 255, 0.08);
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.terminal-header {
+  background: #101625;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+
+.terminal-title {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+
+.terminal-lang {
+  color: var(--accent-cyan);
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.terminal-body {
+  padding: 1.25rem;
+  color: #c9d1d9;
+  line-height: 1.6;
+}
+
+.term-line {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+}
+
+.t-prompt {
+  color: var(--accent-teal);
+  font-weight: 700;
+  margin-right: 0.4rem;
+}
+
+.t-cmd {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.term-output {
+  margin-left: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.t-cyan { color: var(--accent-cyan); }
+.t-green { color: var(--accent-teal); }
+.t-json {
+  color: #93c5fd;
+  white-space: pre-wrap;
+  font-size: 0.8rem;
+}
+
+.cursor {
+  animation: blink 1s step-end infinite;
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* --------------------------------------------------
+   8. Stats Strip
+   -------------------------------------------------- */
+.stats-strip {
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--border-glass);
+  border-bottom: 1px solid var(--border-glass);
+  background: rgba(13, 21, 39, 0.4);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  border-radius: 0.95rem;
+  transition: all var(--trans-norm);
+}
+
+.stat-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(0, 240, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.stat-icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 0.75rem;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+}
+
+.stat-highlight {
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------
+   9. About Section
+   -------------------------------------------------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 2rem;
+}
+
+.about-narrative {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.about-subtitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.about-narrative p {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.about-narrative strong {
+  color: var(--text-main);
+}
+
+.about-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-glass);
+}
+
+.highlight-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.highlight-item i {
+  font-size: 1.15rem;
+  color: var(--accent-cyan);
+  background: rgba(0, 240, 255, 0.08);
+  padding: 0.65rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.highlight-item strong {
+  display: block;
+  font-size: 0.975rem;
+  color: var(--text-main);
+  margin-bottom: 0.2rem;
+}
+
+.highlight-item span {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.about-info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.card-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.65rem;
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  color: var(--accent-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 1.25rem;
+}
+
+.education-card h4,
+.beyond-card h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.edu-degree {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.edu-school {
+  font-size: 0.925rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.edu-timeline {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.timeline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.3rem 0.65rem;
+  border-radius: 0.4rem;
+  border: 1px solid var(--border-glass);
+}
+
+.beyond-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.beyond-list li {
+  font-size: 0.925rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.beyond-list i {
+  color: var(--accent-teal);
+  font-size: 0.9rem;
+}
+
+/* --------------------------------------------------
+   10. Skills Section
+   -------------------------------------------------- */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
+}
+
+.skill-category {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cat-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.cat-cyan {
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+}
+
+.cat-green {
+  background: rgba(0, 229, 153, 0.1);
+  color: var(--accent-teal);
+  border: 1px solid rgba(0, 229, 153, 0.25);
+}
+
+.cat-purple {
+  background: rgba(168, 85, 247, 0.1);
+  color: var(--accent-purple);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+.cat-orange {
+  background: rgba(249, 115, 22, 0.1);
+  color: var(--accent-orange);
+  border: 1px solid rgba(249, 115, 22, 0.25);
+}
+
+.category-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.cat-sub {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+.skill-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skill-chip {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  padding: 0.75rem 1rem;
+  border-radius: 0.65rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.chip-name {
+  display: block;
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: var(--text-main);
+  position: relative;
+  z-index: 1;
+}
+
+.chip-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: var(--level, 50%);
+  background: var(--grad-cyan-teal);
+  border-radius: 2px;
+}
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.tech-tag {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.45rem 0.85rem;
+  border-radius: 0.5rem;
+  transition: all var(--trans-fast);
+}
+
+.tech-tag:hover {
+  background: rgba(0, 240, 255, 0.08);
+  border-color: rgba(0, 240, 255, 0.25);
+  color: var(--accent-cyan);
+  transform: translateY(-2px);
+}
+
+.tag-purple:hover {
+  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(168, 85, 247, 0.3);
+  color: var(--accent-purple);
+}
+
+/* --------------------------------------------------
+   11. Competitive Programming Section
+   -------------------------------------------------- */
+.cp-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  padding: 2.5rem;
+}
+
+.cp-overview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 2rem;
+}
+
+.cp-profile-box {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.cp-avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.cp-info h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.cf-link {
+  color: var(--accent-cyan);
+  border-bottom: 1px dashed rgba(0, 240, 255, 0.4);
+}
+
+.cf-link:hover {
+  color: #fff;
+  border-bottom-style: solid;
+}
+
+.rank-badge.newbie {
+  color: #94a3b8;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.cp-numbers {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.cp-num-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.cp-num-box .num {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  letter-spacing: -0.02em;
+  font-family: var(--font-mono);
+}
+
+.cp-num-box .label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Problem Solving Heatmap Grid */
+.cp-matrix-container {
+  background: rgba(7, 11, 20, 0.65);
+  border: 1px solid var(--border-glass);
+  border-radius: 1rem;
+  padding: 1.75rem;
+}
+
+.matrix-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.matrix-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.matrix-legend {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.legend-box {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  margin-right: 0.25rem;
+}
+
+.l-solved { background: var(--accent-cyan); }
+.l-target { background: #38bdf8; box-shadow: 0 0 8px #38bdf8; }
+
+.codeforces-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13px, 1fr));
+  gap: 5px;
+  padding: 0.5rem 0;
+}
+
+.codeforces-grid i {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.codeforces-grid i.solved {
+  background: var(--accent-cyan);
+  opacity: 0.85;
+}
+
+.codeforces-grid i.solved:hover {
+  transform: scale(1.6);
+  opacity: 1;
+  box-shadow: 0 0 10px var(--accent-cyan);
+  z-index: 10;
+}
+
+.codeforces-grid i.current {
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: pulseTarget 1.5s infinite;
+}
+
+@keyframes pulseTarget {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.matrix-footer {
+  margin-top: 1rem;
+  font-size: 0.825rem;
+  color: var(--text-dim);
+}
+
+/* Topics Breakdown Progress */
+.cp-topics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.topic-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+}
+
+.topic-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  margin-bottom: 0.65rem;
+  font-weight: 500;
+}
+
+.topic-count {
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-bar .fill {
+  height: 100%;
+  background: var(--grad-cyan-teal);
+  border-radius: 9999px;
+}
+
+/* --------------------------------------------------
+   12. Cybersecurity & CTF Section
+   -------------------------------------------------- */
+.security-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.ctf-flag-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background: rgba(244, 63, 94, 0.1);
+  border: 1px solid rgba(244, 63, 94, 0.25);
+  color: var(--accent-pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  margin-bottom: 1.25rem;
+}
+
+.ctf-intro-card h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.ctf-intro-card p {
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.ctf-points {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.ctf-point {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.ctf-point i {
+  color: var(--accent-pink);
+  font-size: 1.05rem;
+  margin-top: 0.2rem;
+}
+
+.ctf-point strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  margin-bottom: 0.2rem;
+}
+
+.ctf-point span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Interactive CTF Simulator */
+.ctf-interactive {
+  display: flex;
+  flex-direction: column;
+}
+
+.interactive-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.window-title {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge-pulse {
+  background: rgba(0, 229, 153, 0.15);
+  color: var(--accent-teal);
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+}
+
+.challenge-desc {
+  font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.9rem;
+  border-radius: 0.65rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-muted);
+}
+
+.challenge-desc code {
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+}
+
+.sim-input-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.input-wrapper input {
+  flex: 1;
+  background: rgba(7, 11, 20, 0.8);
+  border: 1px solid var(--border-glass);
+  border-radius: 0.55rem;
+  padding: 0.65rem 0.95rem;
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  transition: border-color var(--trans-fast);
+}
+
+.input-wrapper input:focus {
+  border-color: var(--accent-cyan);
+}
+
+.flag-output {
+  font-family: var(--font-mono);
+  font-size: 0.825rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  color: var(--text-dim);
+  transition: all var(--trans-fast);
+}
+
+.flag-output.success {
+  background: rgba(0, 229, 153, 0.12);
+  border-color: rgba(0, 229, 153, 0.4);
+  color: var(--accent-teal);
+}
+
+.flag-output.error {
+  background: rgba(244, 63, 94, 0.12);
+  border-color: rgba(244, 63, 94, 0.4);
+  color: var(--accent-pink);
+}
+
+.security-quotes {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-glass);
+  display: flex;
+  gap: 0.75rem;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* --------------------------------------------------
+   13. Projects Section
+   -------------------------------------------------- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+.project-banner {
+  background: rgba(13, 21, 39, 0.8);
+  border-bottom: 1px solid var(--border-glass);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-tag-featured {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-teal);
+  background: rgba(0, 229, 153, 0.1);
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 229, 153, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.project-tag {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.project-status {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+.project-content {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.project-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+  line-height: 1.3;
+}
+
+.project-desc {
+  font-size: 0.925rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+  flex: 1;
+}
+
+.project-role-box {
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid var(--accent-cyan);
+  padding: 0.75rem 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+}
+
+.project-role-box i {
+  color: var(--accent-cyan);
+  margin-top: 0.2rem;
+}
+
+.project-tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1.75rem;
+}
+
+.project-tech-tags span {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  padding: 0.25rem 0.55rem;
+  border-radius: 0.35rem;
+  border: 1px solid var(--border-glass);
+}
+
+.project-links {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+/* --------------------------------------------------
+   14. Contact Section
+   -------------------------------------------------- */
+.contact-wrapper {
+  padding: 3.5rem;
+}
+
+.contact-header-content {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 3rem;
+}
+
+.contact-heading {
+  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 1rem 0;
+  line-height: 1.2;
+}
+
+.contact-sub {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.contact-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  position: relative;
+  transition: all var(--trans-norm);
+}
+
+.contact-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(0, 240, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), var(--shadow-glow-cyan);
+}
+
+.c-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.c-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.c-title {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.c-val {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  word-break: break-all;
+}
+
+.c-arrow {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  transition: transform var(--trans-fast), color var(--trans-fast);
+}
+
+.contact-card:hover .c-arrow {
+  color: var(--accent-cyan);
+  transform: translate(3px, -3px);
+}
+
+.copy-email-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--trans-fast);
+}
+
+.copy-email-btn:hover {
+  background: var(--accent-cyan);
+  color: #070b14;
+}
+
+.email-cta-box {
+  background: rgba(0, 240, 255, 0.03);
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.email-cta-text h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.email-cta-text p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* --------------------------------------------------
+   15. Footer
+   -------------------------------------------------- */
+.footer {
+  border-top: 1px solid var(--border-glass);
+  padding: 3rem 0;
+  background: #04070e;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-title {
+  font-size: 1.05rem;
+  color: var(--text-main);
+}
+
+.footer-sub {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-links a {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.footer-links a:hover {
+  color: var(--accent-cyan);
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  width: 100%;
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* Toast Message */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: #0f172a;
+  color: var(--accent-teal);
+  border: 1px solid var(--accent-teal);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 229, 153, 0.2);
+  padding: 0.85rem 1.5rem;
+  border-radius: 0.75rem;
+  font-size: 0.925rem;
+  font-weight: 600;
+  z-index: 9999;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* --------------------------------------------------
+   16. Responsive Media Queries
+   -------------------------------------------------- */
+@media (max-width: 1024px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .hero-visual {
+    max-width: 600px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 4.5rem;
+    left: 0;
+    width: 100%;
+    background: rgba(7, 11, 20, 0.97);
+    backdrop-filter: blur(25px);
+    border-bottom: 1px solid var(--border-glass);
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1.25rem;
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--trans-norm);
+  }
+
+  .nav-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .skills-grid,
+  .security-grid,
+  .cp-topics-grid,
+  .contact-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cp-overview {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cp-numbers {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .contact-wrapper {
+    padding: 1.75rem;
+  }
+
+  .email-cta-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* --------------------------------------------------
+   3D Tilt & Specular Glare System
+   -------------------------------------------------- */
+.tilt-3d {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  position: relative;
+}
+
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.22) 0%, rgba(255, 255, 255, 0) 70%);
+  opacity: 0;
+  mix-blend-mode: screen;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+}
+
+.tilt-3d:hover .tilt-glare {
+  opacity: 1;
+}
+
+/* 3D Depth offsets for card elements */
+.tilt-3d .stat-icon,
+.tilt-3d .cat-icon,
+.tilt-3d .c-icon,
+.tilt-3d .project-banner,
+.tilt-3d .terminal-header,
+.tilt-3d .hologram-header {
+  transform: translateZ(20px);
+}
+
+.tilt-3d .stat-meta,
+.tilt-3d .project-content,
+.tilt-3d .terminal-body,
+.tilt-3d .c-info {
+  transform: translateZ(12px);
+}
+
+/* --------------------------------------------------
+   3D Scroll Reveal & Flip Entrance Transitions
+   -------------------------------------------------- */
+.reveal-3d {
+  opacity: 0;
+  transform: perspective(1000px) rotateX(15deg) translateY(45px) scale(0.96);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-3d.active {
+  opacity: 1;
+  transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
+}
+
+/* Stagger delays */
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+
+/* 3D Interactive CTF Flag Pulse */
+.flag-output.success {
+  animation: cyberSuccessPulse 1s ease-out;
+}
+
+@keyframes cyberSuccessPulse {
+  0% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(0, 229, 153, 0.8); }
+  50% { transform: scale(1.02); box-shadow: 0 0 25px 8px rgba(0, 229, 153, 0.5); }
+  100% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 229, 153, 0.2); }
+}
+
+/* Button 3D Press Effect */
+.btn {
+  transform-style: preserve-3d;
+  transition: transform var(--trans-fast), box-shadow var(--trans-fast), background var(--trans-fast);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .glow-orb {
+    animation: none;
+  }
+}
+
+</style>
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="glow-bg">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-brand">
+        <span class="brand-code">&lt;NJ /&gt;</span>
+        <span class="brand-name">Nischay Jain</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#about" class="nav-link"><i class="fa-regular fa-user"></i> About</a>
+        <a href="#skills" class="nav-link"><i class="fa-solid fa-code"></i> Skills</a>
+        <a href="#cp" class="nav-link"><i class="fa-solid fa-terminal"></i> Algorithms</a>
+        <a href="#security" class="nav-link"><i class="fa-solid fa-shield-halved"></i> Security</a>
+        <a href="#projects" class="nav-link"><i class="fa-solid fa-folder-open"></i> Projects</a>
+        <a href="#contact" class="nav-link"><i class="fa-regular fa-envelope"></i> Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="mailto:jainnischay66@gmail.com" class="btn btn-sm btn-primary">
+          <span>Get in Touch</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <div class="status-pill">
+            <span class="pulse-dot"></span>
+            <span>Available for Internships & CTF Teams</span>
+          </div>
+
+          <h1 class="hero-title">
+            Deconstructing systems.<br>
+            <span class="gradient-text">Cracking algorithms.</span>
+          </h1>
+
+          <p class="hero-description">
+            I'm <strong>Nischay Jain</strong>, a first-year Computer Science student at 
+            <strong>Newton School of Technology</strong> (Rishihood University). 
+            I bridge the gap between rigorous algorithmic problem solving and offensive/defensive cybersecurity.
+          </p>
+
+          <div class="hero-social-links">
+            <a href="https://github.com/jainnischay66-ops" target="_blank" rel="noopener" class="social-badge" title="GitHub">
+              <i class="fa-brands fa-github"></i>
+              <span>GitHub</span>
+            </a>
+            <a href="https://codeforces.com/profile/insaneNischay" target="_blank" rel="noopener" class="social-badge" title="Codeforces">
+              <i class="fa-solid fa-chart-simple"></i>
+              <span>Codeforces: <strong>insaneNischay</strong></span>
+            </a>
+            <a href="https://www.linkedin.com/in/nischay-jain-20b5aa40b" target="_blank" rel="noopener" class="social-badge" title="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+              <span>LinkedIn</span>
+            </a>
+            <a href="mailto:jainnischay66@gmail.com" class="social-badge" title="Email">
+              <i class="fa-regular fa-envelope"></i>
+              <span>Email</span>
+            </a>
+          </div>
+
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary">
+              <span>View Projects</span>
+              <i class="fa-solid fa-arrow-down"></i>
+            </a>
+            <a href="#cp" class="btn btn-glass">
+              <i class="fa-solid fa-laptop-code"></i>
+              <span>Competitive Stats</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <!-- 3D Holographic Cyber Core Viewport -->
+          <div class="cyber-3d-hologram glass-card tilt-3d" id="cyberHologramBox">
+            <div class="hologram-header">
+              <div class="hologram-title">
+                <span class="holo-dot"></span>
+                <span>CYBER_CORE // 3D NEURAL MESH</span>
+              </div>
+              <div class="holo-controls">
+                <button id="morphGeometryBtn" class="holo-btn" type="button" aria-label="Morph 3D shape">
+                  <i class="fa-solid fa-shapes"></i> <span id="currentShapeLabel">Icosahedron</span>
+                </button>
+                <button id="toggleWireframeBtn" class="holo-btn" type="button" aria-label="Toggle wireframe mode" title="Toggle Wireframe">
+                  <i class="fa-solid fa-border-none"></i>
+                </button>
+                <button id="reset3dViewBtn" class="holo-btn" type="button" aria-label="Reset 3D camera" title="Reset View">
+                  <i class="fa-solid fa-arrows-rotate"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="hologram-canvas-container" id="canvasContainer">
+              <canvas id="cyber3dCanvas" aria-label="Interactive 3D rotating cyber geometric mesh"></canvas>
+              <div class="hologram-overlay-data">
+                <span class="holo-tag holo-top-left"><i class="fa-solid fa-shield-halved"></i> SEC_OPS: ACTIVE</span>
+                <span class="holo-tag holo-bottom-right" id="fpsOrSpeedBadge"><i class="fa-solid fa-bolt"></i> THREE.JS 3D</span>
+              </div>
+            </div>
+
+            <div class="hologram-footer">
+              <span><i class="fa-solid fa-arrows-up-down-left-right"></i> Drag to rotate in 3D &bull; Scroll to zoom</span>
+            </div>
+          </div>
+
+          <!-- Interactive Terminal Card -->
+          <div class="terminal-card tilt-3d">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <div class="terminal-title">nischay@nst-box:~</div>
+              <div class="terminal-lang">zsh</div>
+            </div>
+            <div class="terminal-body" id="typewriter">
+              <div class="term-line"><span class="t-prompt">$</span> <span class="t-cmd">whoami</span></div>
+              <div class="term-output t-cyan">Nischay Jain [B.Tech CS Undergrad]</div>
+              <div class="term-line"><span class="t-prompt">$</span> <span class="t-cmd">cat interests.json</span></div>
+              <div class="term-output t-json">
+{
+  "focus": ["Cybersecurity", "Competitive Programming"],
+  "primary_languages": ["C++20", "Python3"],
+  "platform": "Codeforces (@insaneNischay)",
+  "problems_solved": 150+,
+  "ctf_specialties": ["Reverse Eng", "Crypto", "Web"],
+  "mindset": "Break it down, optimize, secure."
+}</div>
+              <div class="term-line"><span class="t-prompt">$</span> <span class="t-cmd">status --ready</span></div>
+              <div class="term-output t-green"><i class="fa-solid fa-check"></i> Prepared for ICPC & CTF Challenges <span class="cursor">_</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Stats Strip -->
+    <section class="stats-strip">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-fire"></i></div>
+            <div class="stat-meta">
+              <div class="stat-number">150+</div>
+              <div class="stat-label">Algorithmic Problems Solved</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-trophy"></i></div>
+            <div class="stat-meta">
+              <div class="stat-number">Codeforces</div>
+              <div class="stat-label">Handle: <span class="stat-highlight">insaneNischay</span></div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-flag"></i></div>
+            <div class="stat-meta">
+              <div class="stat-number">picoCTF</div>
+              <div class="stat-label">Active Competitor & Team Player</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-lightbulb"></i></div>
+            <div class="stat-meta">
+              <div class="stat-number">SIH '24</div>
+              <div class="stat-label">Smart India Hackathon Innovator</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+      <div class="container">
+        <div class="section-badge"><i class="fa-solid fa-user-astronaut"></i> Background</div>
+        <h2 class="section-title">Driven by Curiosity & Deep Problem Solving</h2>
+
+        <div class="about-grid">
+          <div class="about-narrative glass-card">
+            <h3 class="about-subtitle">The Engineering Mindset</h3>
+            <p>
+              I am a first-year Computer Science student at <strong>Newton School of Technology, Rishihood University</strong>. 
+              My journey began with a curiosity about how digital systems function under the hood—and more importantly, 
+              how they can be pushed to their limits or protected from exploitation.
+            </p>
+            <p>
+              Whether it's dissecting an intricate dynamic programming problem, analyzing bitwise constraints for optimal performance, 
+              or investigating memory vulnerabilities in a CTF binary, I thrive on breaking complex puzzles down into modular, solvable pieces.
+            </p>
+            <p>
+              Beyond coding, I'm an active <strong>chess player</strong>, which keeps my tactical thinking sharp, and I love discussing emerging cyber threats and tech innovations.
+            </p>
+
+            <div class="about-highlights">
+              <div class="highlight-item">
+                <i class="fa-solid fa-brain"></i>
+                <div>
+                  <strong>First-Principles Thinking</strong>
+                  <span>Analyzing problems from algorithmic foundations to hardware interactions.</span>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <i class="fa-solid fa-shield-virus"></i>
+                <div>
+                  <strong>Security-First Perspective</strong>
+                  <span>Understanding vulnerability vectors to build robust, attack-resilient software.</span>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <i class="fa-solid fa-users-gear"></i>
+                <div>
+                  <strong>Collaborative Spirit</strong>
+                  <span>Always eager to team up for 24-hour CTFs, ICPC qualifiers, and hackathons.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-info-column">
+            <div class="glass-card education-card">
+              <div class="card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+              <h4>Education</h4>
+              <p class="edu-degree">B.Tech in Computer Science</p>
+              <p class="edu-school">Newton School of Technology at Rishihood University</p>
+              <div class="edu-timeline">
+                <span class="timeline-badge"><i class="fa-regular fa-calendar"></i> 2024 – Present</span>
+                <span class="timeline-badge"><i class="fa-solid fa-location-dot"></i> Sonipat, India</span>
+              </div>
+            </div>
+
+            <div class="glass-card beyond-card">
+              <div class="card-icon"><i class="fa-solid fa-compass"></i></div>
+              <h4>Beyond the Terminal</h4>
+              <ul class="beyond-list">
+                <li><i class="fa-solid fa-chess-knight"></i> <strong>Chess:</strong> Tactical analysis & time-management</li>
+                <li><i class="fa-solid fa-film"></i> <strong>Cinematics & Music:</strong> Deep storytelling & audio design</li>
+                <li><i class="fa-solid fa-bullhorn"></i> <strong>Tech Content:</strong> Documenting write-ups & learnings</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section skills-section" id="skills">
+      <div class="container">
+        <div class="section-badge"><i class="fa-solid fa-layer-group"></i> Technical Arsenal</div>
+        <h2 class="section-title">Core Competencies & Technologies</h2>
+        <p class="section-subtitle">
+          Specialized skills honed through competitive programming practice, CTF tournaments, and project development.
+        </p>
+
+        <div class="skills-grid">
+          <!-- Programming Languages -->
+          <div class="glass-card skill-category">
+            <div class="category-header">
+              <div class="cat-icon cat-cyan"><i class="fa-solid fa-code"></i></div>
+              <div>
+                <h3>Languages</h3>
+                <span class="cat-sub">High-efficiency execution</span>
+              </div>
+            </div>
+            <div class="skill-chips">
+              <div class="skill-chip">
+                <span class="chip-name">C++ (STL, C++17/20)</span>
+                <span class="chip-bar" style="--level: 90%;"></span>
+              </div>
+              <div class="skill-chip">
+                <span class="chip-name">Python 3</span>
+                <span class="chip-bar" style="--level: 85%;"></span>
+              </div>
+              <div class="skill-chip">
+                <span class="chip-name">C</span>
+                <span class="chip-bar" style="--level: 75%;"></span>
+              </div>
+              <div class="skill-chip">
+                <span class="chip-name">HTML5 / Modern CSS</span>
+                <span class="chip-bar" style="--level: 80%;"></span>
+              </div>
+              <div class="skill-chip">
+                <span class="chip-name">Bash & Shell Scripting</span>
+                <span class="chip-bar" style="--level: 70%;"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Competitive Programming Algorithms -->
+          <div class="glass-card skill-category">
+            <div class="category-header">
+              <div class="cat-icon cat-green"><i class="fa-solid fa-chart-line"></i></div>
+              <div>
+                <h3>Algorithms & DS</h3>
+                <span class="cat-sub">Competitive problem solving</span>
+              </div>
+            </div>
+            <div class="tag-cloud">
+              <span class="tech-tag">Prefix Sums</span>
+              <span class="tech-tag">Bitwise Manipulations</span>
+              <span class="tech-tag">Greedy Algorithms</span>
+              <span class="tech-tag">Dynamic Programming</span>
+              <span class="tech-tag">Number Theory & Math</span>
+              <span class="tech-tag">String Processing</span>
+              <span class="tech-tag">Binary Search</span>
+              <span class="tech-tag">Two Pointers & Sliding Window</span>
+              <span class="tech-tag">Graph Traversal Basics</span>
+              <span class="tech-tag">Combinatorics</span>
+            </div>
+          </div>
+
+          <!-- Cybersecurity & CTF Domains -->
+          <div class="glass-card skill-category">
+            <div class="category-header">
+              <div class="cat-icon cat-purple"><i class="fa-solid fa-user-shield"></i></div>
+              <div>
+                <h3>Cybersecurity</h3>
+                <span class="cat-sub">Offensive & defensive methods</span>
+              </div>
+            </div>
+            <div class="tag-cloud">
+              <span class="tech-tag tag-purple">Web Security Basics</span>
+              <span class="tech-tag tag-purple">Cryptography (Ciphers & RSA)</span>
+              <span class="tech-tag tag-purple">Network Forensics</span>
+              <span class="tech-tag tag-purple">Reverse Engineering Basics</span>
+              <span class="tech-tag tag-purple">Binary Inspection</span>
+              <span class="tech-tag tag-purple">Steganography</span>
+              <span class="tech-tag tag-purple">OSINT & Reconnaissance</span>
+              <span class="tech-tag tag-purple">Privilege Esc Concepts</span>
+            </div>
+          </div>
+
+          <!-- Tools & Environments -->
+          <div class="glass-card skill-category">
+            <div class="category-header">
+              <div class="cat-icon cat-orange"><i class="fa-solid fa-wrench"></i></div>
+              <div>
+                <h3>Developer Tools</h3>
+                <span class="cat-sub">Toolchain & platforms</span>
+              </div>
+            </div>
+            <div class="tag-cloud">
+              <span class="tech-tag">Git & GitHub</span>
+              <span class="tech-tag">Linux (Ubuntu / Kali)</span>
+              <span class="tech-tag">Wireshark</span>
+              <span class="tech-tag">Burp Suite Community</span>
+              <span class="tech-tag">GDB & Debuggers</span>
+              <span class="tech-tag">VS Code</span>
+              <span class="tech-tag">CyberChef</span>
+              <span class="tech-tag">picoGym Environment</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Competitive Programming Section -->
+    <section class="section cp-section" id="cp">
+      <div class="container">
+        <div class="section-badge"><i class="fa-solid fa-code-compare"></i> Competitive Track</div>
+        <h2 class="section-title">Competitive Programming & Codeforces</h2>
+        <p class="section-subtitle">
+          Building speed, mathematical precision, and asymptotic optimization through daily practice.
+        </p>
+
+        <div class="cp-dashboard glass-card">
+          <div class="cp-overview">
+            <div class="cp-profile-box">
+              <div class="cp-avatar">
+                <i class="fa-solid fa-terminal"></i>
+              </div>
+              <div class="cp-info">
+                <h3>Codeforces: <a href="https://codeforces.com/profile/insaneNischay" target="_blank" rel="noopener" class="cf-link">insaneNischay <i class="fa-solid fa-arrow-up-right-from-square"></i></a></h3>
+                <p>Status: <span class="rank-badge newbie">Newbie</span> &bull; Current Rating: <strong>483</strong> &bull; Goal: <strong>Specialist &rarr; Candidate Master</strong></p>
+              </div>
+            </div>
+
+            <div class="cp-numbers">
+              <div class="cp-num-box">
+                <span class="num" id="cfCount">153+</span>
+                <span class="label">Problems Solved</span>
+              </div>
+              <div class="cp-num-box">
+                <span class="num">C++ / Py</span>
+                <span class="label">Primary Stack</span>
+              </div>
+              <div class="cp-num-box">
+                <span class="num">ICPC</span>
+                <span class="label">Target Ambition</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Problem Solving Heatmap / Matrix visualization -->
+          <div class="cp-matrix-container">
+            <div class="matrix-head">
+              <span class="matrix-title"><i class="fa-solid fa-cubes"></i> Codeforces Problem Grid (150+ Solved)</span>
+              <span class="matrix-legend">
+                <span class="legend-box l-solved"></span> Solved
+                <span class="legend-box l-target"></span> Next in pipeline
+              </span>
+            </div>
+
+            <div id="codeforcesGrid" class="codeforces-grid" role="img" aria-label="153 solved problem tiles showing competitive programming progression"></div>
+            
+            <div class="matrix-footer">
+              <p>Each tile represents an algorithmic hurdle conquered on Codeforces across greedy strategies, prefix sums, binary masks, and dynamic state transitions.</p>
+            </div>
+          </div>
+
+          <!-- Topic breakdown cards -->
+          <div class="cp-topics-grid">
+            <div class="topic-item">
+              <div class="topic-header">
+                <span>Bitwise & Number Theory</span>
+                <span class="topic-count">35+ solved</span>
+              </div>
+              <div class="progress-bar"><div class="fill" style="width: 85%;"></div></div>
+            </div>
+
+            <div class="topic-item">
+              <div class="topic-header">
+                <span>Prefix Sums & Two Pointers</span>
+                <span class="topic-count">40+ solved</span>
+              </div>
+              <div class="progress-bar"><div class="fill" style="width: 90%;"></div></div>
+            </div>
+
+            <div class="topic-item">
+              <div class="topic-header">
+                <span>Greedy & Constructive</span>
+                <span class="topic-count">45+ solved</span>
+              </div>
+              <div class="progress-bar"><div class="fill" style="width: 92%;"></div></div>
+            </div>
+
+            <div class="topic-item">
+              <div class="topic-header">
+                <span>Dynamic Programming & Recursion</span>
+                <span class="topic-count">30+ solved</span>
+              </div>
+              <div class="progress-bar"><div class="fill" style="width: 70%;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cybersecurity & CTF Section -->
+    <section class="section security-section" id="security">
+      <div class="container">
+        <div class="section-badge"><i class="fa-solid fa-lock"></i> Security & CTF</div>
+        <h2 class="section-title">Cybersecurity & Capture The Flag</h2>
+        <p class="section-subtitle">
+          Deconstructing attack surfaces, decrypting ciphertexts, and examining memory flaws.
+        </p>
+
+        <div class="security-grid">
+          <div class="glass-card ctf-intro-card">
+            <div class="ctf-flag-icon"><i class="fa-solid fa-flag"></i></div>
+            <h3>Competitive CTF Player</h3>
+            <p>
+              I participate in Capture The Flag competitions (including <strong>picoCTF</strong>) alongside my security peers. 
+              CTFs provide the ultimate sandbox to test theoretical cybersecurity knowledge against live scenarios under tight deadlines.
+            </p>
+            <div class="ctf-points">
+              <div class="ctf-point">
+                <i class="fa-solid fa-terminal"></i>
+                <div>
+                  <strong>Reverse Engineering & Binaries</strong>
+                  <span>Analyzing decompiled code and flow logic to recover embedded verification flags.</span>
+                </div>
+              </div>
+              <div class="ctf-point">
+                <i class="fa-solid fa-key"></i>
+                <div>
+                  <strong>Applied Cryptography</strong>
+                  <span>Breaking broken stream/block implementations, modular arithmetic, and entropy exploits.</span>
+                </div>
+              </div>
+              <div class="ctf-point">
+                <i class="fa-solid fa-bug"></i>
+                <div>
+                  <strong>Web Security</strong>
+                  <span>Investigating sanitization oversights, parameter tampering, and authentication bypasses.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ctf-interactive glass-card">
+            <div class="interactive-head">
+              <span class="window-title"><i class="fa-solid fa-terminal"></i> CTF Flag Verifier Simulator</span>
+              <span class="badge badge-pulse">Interactive</span>
+            </div>
+            <div class="interactive-body">
+              <p class="challenge-desc">
+                <code>[CHALLENGE: Baby-XOR-Auth]</code><br>
+                Extract the secret key from logic:
+                <br>
+                <em>"Cipher: <code>0x4e 0x4a 0x5f 0x53 0x45 0x43</code> &bull; Hint: 'NJ' initials"</em>
+              </p>
+
+              <div class="sim-input-group">
+                <label for="flagInput">Enter CTF Flag:</label>
+                <div class="input-wrapper">
+                  <input type="text" id="flagInput" placeholder="flag{nischay_cyber_pro}" value="flag{nischay_ctf_2024}">
+                  <button id="verifyFlagBtn" class="btn btn-sm btn-primary">Check Flag</button>
+                </div>
+                <div id="flagOutput" class="flag-output">Status: Ready for input verification</div>
+              </div>
+
+              <div class="security-quotes">
+                <i class="fa-solid fa-quote-left"></i>
+                <p>Security is not a product, but a process. It requires understanding both how to write resilient software and how attackers seek to subvert it.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects-section" id="projects">
+      <div class="container">
+        <div class="section-badge"><i class="fa-solid fa-diagram-project"></i> Portfolio Works</div>
+        <h2 class="section-title">Featured Projects & Contributions</h2>
+        <p class="section-subtitle">
+          A blend of hackathon solutions, algorithmic repositories, and developer tools.
+        </p>
+
+        <div class="projects-grid">
+          <!-- Project 1: Smart India Hackathon -->
+          <article class="glass-card project-card featured">
+            <div class="project-banner">
+              <span class="project-tag-featured"><i class="fa-solid fa-star"></i> Smart India Hackathon '24</span>
+              <span class="project-status">Healthcare Innovation</span>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Smart Dementia Care & Elder Support System</h3>
+              <p class="project-desc">
+                An innovative technology solution crafted for the <strong>Smart India Hackathon</strong> dedicated to supporting 
+                elderly individuals living with dementia and memory impairments. Designed to assist family caregivers with 
+                safety geo-fencing, proactive emergency alerts, daily medication tracking, and intuitive memory cues.
+              </p>
+
+              <div class="project-role-box">
+                <i class="fa-solid fa-user-check"></i>
+                <span><strong>Role & Focus:</strong> System architecture, safety verification logic & backend coordination.</span>
+              </div>
+
+              <div class="project-tech-tags">
+                <span>Python</span>
+                <span>Geo-Services</span>
+                <span>Alert Telemetry</span>
+                <span>UI/UX</span>
+                <span>IoT Concept</span>
+              </div>
+
+              <div class="project-links">
+                <a href="mailto:jainnischay66@gmail.com?subject=Inquiry%20regarding%20SIH%20Dementia%20Project" class="btn btn-sm btn-primary">
+                  <i class="fa-solid fa-circle-info"></i> Project Details
+                </a>
+                <a href="https://github.com/jainnischay66-ops" target="_blank" rel="noopener" class="btn btn-sm btn-glass">
+                  <i class="fa-brands fa-github"></i> Repository
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2: CP & CTF Vault -->
+          <article class="glass-card project-card">
+            <div class="project-banner">
+              <span class="project-tag"><i class="fa-solid fa-folder-tree"></i> Code Repository</span>
+              <span class="project-status">Continuously Updated</span>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Competitive Programming & CTF Vault</h3>
+              <p class="project-desc">
+                A structured, documented repository housing 150+ modular solutions to competitive programming challenges (Codeforces, AtCoder) 
+                and write-ups for picoCTF challenges across cryptography, forensics, and binary reverse engineering.
+              </p>
+
+              <div class="project-role-box">
+                <i class="fa-solid fa-code"></i>
+                <span><strong>Stack:</strong> C++20, Python 3, Markdown documentation, Makefiles</span>
+              </div>
+
+              <div class="project-tech-tags">
+                <span>C++20</span>
+                <span>Python</span>
+                <span>Algorithms</span>
+                <span>CTF Write-ups</span>
+              </div>
+
+              <div class="project-links">
+                <a href="https://github.com/jainnischay66-ops" target="_blank" rel="noopener" class="btn btn-sm btn-primary">
+                  <i class="fa-brands fa-github"></i> Browse Code
+                </a>
+                <a href="https://codeforces.com/profile/insaneNischay" target="_blank" rel="noopener" class="btn btn-sm btn-glass">
+                  <i class="fa-solid fa-chart-line"></i> Codeforces Profile
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3: Modern Portfolio Website -->
+          <article class="glass-card project-card">
+            <div class="project-banner">
+              <span class="project-tag"><i class="fa-solid fa-globe"></i> Web Engineering</span>
+              <span class="project-status">Live Project</span>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Personal Developer Portfolio</h3>
+              <p class="project-desc">
+                A high-performance, dark-aesthetic responsive portfolio website engineered with semantic HTML5, modern CSS3 glassmorphism, 
+                dynamic interactive widgets, and seamless mobile responsiveness. Built to present skills, track Codeforces achievements, and facilitate recruitment.
+              </p>
+
+              <div class="project-role-box">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span><strong>Highlights:</strong> CSS glassmorphism, animated DOM grid, accessible keyboard navigation.</span>
+              </div>
+
+              <div class="project-tech-tags">
+                <span>HTML5</span>
+                <span>Vanilla CSS</span>
+                <span>JavaScript</span>
+                <span>Responsive</span>
+              </div>
+
+              <div class="project-links">
+                <a href="https://github.com/jainnischay66-ops" target="_blank" rel="noopener" class="btn btn-sm btn-primary">
+                  <i class="fa-brands fa-github"></i> Source Code
+                </a>
+                <a href="#hero" class="btn btn-sm btn-glass">
+                  <i class="fa-solid fa-play"></i> Back to Top
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+      <div class="container">
+        <div class="glass-card contact-wrapper">
+          <div class="contact-header-content">
+            <div class="section-badge"><i class="fa-solid fa-paper-plane"></i> Let's Connect</div>
+            <h2 class="contact-heading">Ready to collaborate, compete, or build something great?</h2>
+            <p class="contact-sub">
+              I'm actively seeking <strong>summer internships</strong>, <strong>CTF squad collaborations</strong>, 
+              and opportunities to solve high-impact algorithmic and security problems.
+            </p>
+          </div>
+
+          <div class="contact-cards-grid">
+            <a href="mailto:jainnischay66@gmail.com" class="contact-card">
+              <div class="c-icon"><i class="fa-regular fa-envelope"></i></div>
+              <div class="c-info">
+                <span class="c-title">Email Direct</span>
+                <span class="c-val">jainnischay66@gmail.com</span>
+              </div>
+              <button class="copy-email-btn" id="copyEmailBtn" aria-label="Copy Email address" title="Copy email address">
+                <i class="fa-regular fa-copy"></i>
+              </button>
+            </a>
+
+            <a href="https://www.linkedin.com/in/nischay-jain-20b5aa40b" target="_blank" rel="noopener" class="contact-card">
+              <div class="c-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+              <div class="c-info">
+                <span class="c-title">LinkedIn Professional</span>
+                <span class="c-val">linkedin.com/in/nischay-jain</span>
+              </div>
+              <i class="fa-solid fa-arrow-up-right-from-square c-arrow"></i>
+            </a>
+
+            <a href="https://github.com/jainnischay66-ops" target="_blank" rel="noopener" class="contact-card">
+              <div class="c-icon"><i class="fa-brands fa-github"></i></div>
+              <div class="c-info">
+                <span class="c-title">GitHub Profile</span>
+                <span class="c-val">github.com/jainnischay66-ops</span>
+              </div>
+              <i class="fa-solid fa-arrow-up-right-from-square c-arrow"></i>
+            </a>
+
+            <a href="https://codeforces.com/profile/insaneNischay" target="_blank" rel="noopener" class="contact-card">
+              <div class="c-icon"><i class="fa-solid fa-chart-simple"></i></div>
+              <div class="c-info">
+                <span class="c-title">Codeforces Handle</span>
+                <span class="c-val">insaneNischay</span>
+              </div>
+              <i class="fa-solid fa-arrow-up-right-from-square c-arrow"></i>
+            </a>
+          </div>
+
+          <div class="email-cta-box">
+            <div class="email-cta-text">
+              <h4>Direct Inquiries</h4>
+              <p>Prefer quick email? Click below to launch your email client immediately:</p>
+            </div>
+            <a href="mailto:jainnischay66@gmail.com?subject=Hello%20Nischay%20-%20Opportunity%20/%20Collaboration" class="btn btn-primary btn-lg">
+              <i class="fa-regular fa-paper-plane"></i> Send an Email
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <p class="footer-title"><strong>Nischay Jain</strong></p>
+        <p class="footer-sub">B.Tech in CS &bull; Newton School of Technology (Rishihood University)</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="https://github.com/jainnischay66-ops" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://codeforces.com/profile/insaneNischay" target="_blank" rel="noopener">Codeforces</a>
+        <a href="https://www.linkedin.com/in/nischay-jain-20b5aa40b" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:jainnischay66@gmail.com">Email</a>
+      </div>
+
+      <div class="footer-copy">
+        &copy; 2024–2026 Nischay Jain. Crafted with modern HTML5 & CSS3.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast notification for copy action -->
+  <div class="toast" id="toast">Email copied to clipboard!</div>
+
+  <!-- Three.js Library for 3D Cyber Core & Mesh Rendering -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+/**
+ * Portfolio JavaScript - Nischay Jain
+ * High-Performance Interactive Features:
+ * 1. Three.js 3D Cyber Core (Morphable geometries, Orbiting particles, Drag-to-rotate)
+ * 2. 3D Card Tilt with Dynamic Specular Glare
+ * 3. 3D Scroll Reveal & Entrance Animations
+ * 4. Ambient 3D Mouse Parallax on Glow Orbs
+ * 5. Codeforces 153-Problem Heatmap Animation
+ * 6. CTF Flag Verifier Simulator with 3D Celebration
+ * 7. Copy-to-Clipboard Toast & Mobile Navigation Drawer
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // =========================================================================
+  // 1. Navigation: Scroll Effects & Mobile Drawer
+  // =========================================================================
+  const navbar = document.getElementById('navbar');
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  }, { passive: true });
+
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      const icon = menuToggle.querySelector('i');
+      if (icon) {
+        if (navLinks.classList.contains('active')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-xmark');
+        } else {
+          icon.classList.remove('fa-xmark');
+          icon.classList.add('fa-bars');
+        }
+      }
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        const icon = menuToggle.querySelector('i');
+        if (icon) {
+          icon.classList.remove('fa-xmark');
+          icon.classList.add('fa-bars');
+        }
+      });
+    });
+  }
+
+  // =========================================================================
+  // 2. Three.js Interactive 3D Cyber Core Hologram
+  // =========================================================================
+  const canvas = document.getElementById('cyber3dCanvas');
+  const canvasContainer = document.getElementById('canvasContainer');
+  const morphBtn = document.getElementById('morphGeometryBtn');
+  const shapeLabel = document.getElementById('currentShapeLabel');
+  const wireframeBtn = document.getElementById('toggleWireframeBtn');
+  const resetBtn = document.getElementById('reset3dViewBtn');
+
+  let triggerCelebrationSpin = null;
+
+  if (canvas && canvasContainer && typeof THREE !== 'undefined') {
+    const width = canvasContainer.clientWidth || 380;
+    const height = canvasContainer.clientHeight || 240;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+    camera.position.z = 6.2;
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvas,
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance'
+    });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambientLight);
+
+    const pointLightCyan = new THREE.PointLight(0x00f0ff, 2.5, 15);
+    pointLightCyan.position.set(4, 4, 4);
+    scene.add(pointLightCyan);
+
+    const pointLightTeal = new THREE.PointLight(0x00e599, 2.0, 15);
+    pointLightTeal.position.set(-4, -4, 3);
+    scene.add(pointLightTeal);
+
+    // Group for all rotating elements
+    const coreGroup = new THREE.Group();
+    scene.add(coreGroup);
+
+    // Geometries library for morphing
+    const shapes = [
+      { name: 'Icosahedron', create: () => new THREE.IcosahedronGeometry(1.8, 1) },
+      { name: 'Torus Knot', create: () => new THREE.TorusKnotGeometry(1.1, 0.35, 70, 14) },
+      { name: 'Octahedron', create: () => new THREE.OctahedronGeometry(1.8, 0) },
+      { name: 'Dodecahedron', create: () => new THREE.DodecahedronGeometry(1.7, 0) }
+    ];
+    let currentShapeIndex = 0;
+
+    // Materials
+    let renderMode = 0; // 0: wireframe + solid core, 1: points cloud, 2: cyber glossy
+    const wireframeMaterial = new THREE.MeshStandardMaterial({
+      color: 0x00f0ff,
+      wireframe: true,
+      roughness: 0.2,
+      metalness: 0.8,
+      transparent: true,
+      opacity: 0.85
+    });
+
+    const innerCoreMaterial = new THREE.MeshStandardMaterial({
+      color: 0x00e599,
+      roughness: 0.3,
+      metalness: 0.5,
+      transparent: true,
+      opacity: 0.35
+    });
+
+    // Outer and Inner Meshes
+    let outerMesh = new THREE.Mesh(shapes[0].create(), wireframeMaterial);
+    let innerMesh = new THREE.Mesh(new THREE.IcosahedronGeometry(0.9, 0), innerCoreMaterial);
+    coreGroup.add(outerMesh);
+    coreGroup.add(innerMesh);
+
+    // Orbiting Rings
+    const ringGeo = new THREE.TorusGeometry(2.7, 0.025, 16, 100);
+    const ringMat = new THREE.MeshBasicMaterial({
+      color: 0x38bdf8,
+      transparent: true,
+      opacity: 0.55
+    });
+    const ring1 = new THREE.Mesh(ringGeo, ringMat);
+    ring1.rotation.x = Math.PI / 3;
+    coreGroup.add(ring1);
+
+    const ring2 = new THREE.Mesh(ringGeo, ringMat);
+    ring2.rotation.y = Math.PI / 4;
+    ring2.rotation.x = -Math.PI / 5;
+    coreGroup.add(ring2);
+
+    // Orbiting 3D Particle Cloud
+    const particleCount = 200;
+    const particleGeo = new THREE.BufferGeometry();
+    const particlePositions = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount * 3; i += 3) {
+      const radius = 2.4 + Math.random() * 1.6;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos((Math.random() * 2) - 1);
+
+      particlePositions[i] = radius * Math.sin(phi) * Math.cos(theta);
+      particlePositions[i + 1] = radius * Math.sin(phi) * Math.sin(theta);
+      particlePositions[i + 2] = radius * Math.cos(phi);
+    }
+    particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+
+    const particleMat = new THREE.PointsMaterial({
+      color: 0x00f0ff,
+      size: 0.045,
+      transparent: true,
+      opacity: 0.85,
+      blending: THREE.AdditiveBlending
+    });
+    const particles = new THREE.Points(particleGeo, particleMat);
+    coreGroup.add(particles);
+
+    // Mouse Interaction / Drag State
+    let isDragging = false;
+    let prevMouseX = 0;
+    let prevMouseY = 0;
+    let targetRotationX = 0.2;
+    let targetRotationY = 0.4;
+    let rotationVelocityX = 0;
+    let rotationVelocityY = 0;
+    let celebrationTimer = 0;
+
+    const onPointerDown = (clientX, clientY) => {
+      isDragging = true;
+      prevMouseX = clientX;
+      prevMouseY = clientY;
+    };
+
+    const onPointerMove = (clientX, clientY) => {
+      if (!isDragging) return;
+      const deltaX = clientX - prevMouseX;
+      const deltaY = clientY - prevMouseY;
+
+      rotationVelocityY = deltaX * 0.007;
+      rotationVelocityX = deltaY * 0.007;
+
+      targetRotationY += rotationVelocityY;
+      targetRotationX += rotationVelocityX;
+
+      prevMouseX = clientX;
+      prevMouseY = clientY;
+    };
+
+    const onPointerUp = () => {
+      isDragging = false;
+    };
+
+    canvasContainer.addEventListener('mousedown', (e) => onPointerDown(e.clientX, e.clientY));
+    window.addEventListener('mousemove', (e) => onPointerMove(e.clientX, e.clientY));
+    window.addEventListener('mouseup', onPointerUp);
+
+    canvasContainer.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        onPointerDown(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1) {
+        onPointerMove(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', onPointerUp);
+
+    // Zoom on wheel over canvas
+    canvasContainer.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      camera.position.z += e.deltaY * 0.003;
+      camera.position.z = Math.min(Math.max(camera.position.z, 3.8), 8.5);
+    }, { passive: false });
+
+    // Morph Shape Button Handler
+    if (morphBtn) {
+      morphBtn.addEventListener('click', () => {
+        currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+        const nextShape = shapes[currentShapeIndex];
+        
+        coreGroup.remove(outerMesh);
+        outerMesh.geometry.dispose();
+        outerMesh = new THREE.Mesh(nextShape.create(), wireframeMaterial);
+        coreGroup.add(outerMesh);
+
+        if (shapeLabel) {
+          shapeLabel.textContent = nextShape.name;
+        }
+
+        // Pulse scale animation
+        coreGroup.scale.set(1.15, 1.15, 1.15);
+        setTimeout(() => coreGroup.scale.set(1, 1, 1), 220);
+      });
+    }
+
+    // Toggle Wireframe / Material Mode
+    if (wireframeBtn) {
+      wireframeBtn.addEventListener('click', () => {
+        renderMode = (renderMode + 1) % 3;
+        if (renderMode === 0) {
+          wireframeMaterial.wireframe = true;
+          wireframeMaterial.opacity = 0.85;
+          innerMesh.visible = true;
+        } else if (renderMode === 1) {
+          wireframeMaterial.wireframe = true;
+          wireframeMaterial.opacity = 0.45;
+          innerMesh.visible = false;
+        } else {
+          wireframeMaterial.wireframe = false;
+          wireframeMaterial.opacity = 0.75;
+          innerMesh.visible = true;
+        }
+      });
+    }
+
+    // Reset View Button
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        targetRotationX = 0.2;
+        targetRotationY = 0.4;
+        camera.position.z = 6.2;
+        coreGroup.rotation.set(0, 0, 0);
+      });
+    }
+
+    // Trigger celebration spin when CTF flag verified
+    triggerCelebrationSpin = () => {
+      celebrationTimer = 90; // ~1.5 seconds at 60fps
+      pointLightTeal.intensity = 5.0;
+      pointLightCyan.intensity = 5.0;
+      setTimeout(() => {
+        pointLightTeal.intensity = 2.0;
+        pointLightCyan.intensity = 2.5;
+      }, 1600);
+    };
+
+    // Resize Observer
+    const handleResize = () => {
+      const newWidth = canvasContainer.clientWidth;
+      const newHeight = canvasContainer.clientHeight;
+      if (newWidth && newHeight) {
+        camera.aspect = newWidth / newHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(newWidth, newHeight);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+
+    // Animation Loop
+    let clock = new THREE.Clock();
+    const animate3D = () => {
+      requestAnimationFrame(animate3D);
+
+      const delta = clock.getDelta();
+
+      // Celebration spin boost
+      if (celebrationTimer > 0) {
+        targetRotationY += 0.08;
+        coreGroup.rotation.z += 0.04;
+        celebrationTimer--;
+      } else if (!isDragging && !isReduced) {
+        targetRotationY += 0.005;
+        targetRotationX += Math.sin(clock.getElapsedTime() * 0.5) * 0.001;
+      }
+
+      // Smooth damping interpolation
+      coreGroup.rotation.y += (targetRotationY - coreGroup.rotation.y) * 0.08;
+      coreGroup.rotation.x += (targetRotationX - coreGroup.rotation.x) * 0.08;
+
+      // Orbiting rings animation
+      ring1.rotation.z += 0.008;
+      ring2.rotation.z -= 0.006;
+      particles.rotation.y -= 0.003;
+
+      renderer.render(scene, camera);
+    };
+    animate3D();
+  }
+
+  // =========================================================================
+  // 3. Interactive 3D Card Tilt with Dynamic Specular Glare
+  // =========================================================================
+  const tiltSelectors = [
+    '.tilt-3d',
+    '.stat-card',
+    '.skill-category',
+    '.project-card',
+    '.contact-card',
+    '.about-narrative',
+    '.education-card',
+    '.beyond-card',
+    '.ctf-intro-card',
+    '.ctf-interactive',
+    '.cp-dashboard'
+  ];
+
+  const tiltCards = document.querySelectorAll(tiltSelectors.join(', '));
+
+  if (!isReduced) {
+    tiltCards.forEach(card => {
+      // Avoid duplicate glare layer
+      if (!card.querySelector('.tilt-glare')) {
+        const glare = document.createElement('div');
+        glare.className = 'tilt-glare';
+        card.appendChild(glare);
+      }
+
+      card.classList.add('tilt-3d');
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((y - centerY) / centerY) * -9;
+        const rotateY = ((x - centerX) / centerX) * 9;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(8px) scale3d(1.018, 1.018, 1.018)`;
+
+        const glare = card.querySelector('.tilt-glare');
+        if (glare) {
+          glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0, 240, 255, 0.22) 0%, rgba(255, 255, 255, 0) 70%)`;
+        }
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px) scale3d(1, 1, 1)';
+      });
+    });
+  }
+
+  // =========================================================================
+  // 4. 3D Scroll Reveal & Entrance Transitions
+  // =========================================================================
+  const revealTargets = document.querySelectorAll(`
+    .section-title,
+    .section-subtitle,
+    .stat-card,
+    .about-narrative,
+    .education-card,
+    .beyond-card,
+    .skill-category,
+    .cp-dashboard,
+    .ctf-intro-card,
+    .ctf-interactive,
+    .project-card,
+    .contact-wrapper
+  `);
+
+  revealTargets.forEach((el, idx) => {
+    el.classList.add('reveal-3d');
+    const delayClass = `reveal-delay-${(idx % 4) + 1}`;
+    el.classList.add(delayClass);
+  });
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealTargets.forEach(el => observer.observe(el));
+  } else {
+    revealTargets.forEach(el => el.classList.add('active'));
+  }
+
+  // =========================================================================
+  // 5. Interactive Mouse Parallax on Background Glow Orbs
+  // =========================================================================
+  const orb1 = document.querySelector('.orb-1');
+  const orb2 = document.querySelector('.orb-2');
+  const orb3 = document.querySelector('.orb-3');
+
+  if (!isReduced && (orb1 || orb2 || orb3)) {
+    window.addEventListener('mousemove', (e) => {
+      const offsetX = (e.clientX - window.innerWidth / 2) * 0.025;
+      const offsetY = (e.clientY - window.innerHeight / 2) * 0.025;
+
+      if (orb1) orb1.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;
+      if (orb2) orb2.style.transform = `translate3d(${-offsetX * 1.4}px, ${-offsetY * 1.4}px, 0)`;
+      if (orb3) orb3.style.transform = `translate3d(${offsetX * 0.8}px, ${-offsetY * 0.8}px, 0)`;
+    }, { passive: true });
+  }
+
+  // =========================================================================
+  // 6. Codeforces Problem Heatmap Grid (153 Problems)
+  // =========================================================================
+  const cfGrid = document.getElementById('codeforcesGrid');
+  const TOTAL_SOLVED = 153;
+
+  if (cfGrid) {
+    for (let i = 0; i <= TOTAL_SOLVED; i++) {
+      const tile = document.createElement('i');
+      if (i === TOTAL_SOLVED) {
+        tile.className = 'current';
+        tile.title = `Next Problem (#${i + 1}) - In Progress`;
+      } else {
+        tile.className = isReduced ? 'solved' : '';
+        tile.title = `Codeforces Problem #${i + 1} Conquered`;
+      }
+      cfGrid.appendChild(tile);
+    }
+
+    if (!isReduced) {
+      const tiles = cfGrid.querySelectorAll('i:not(.current)');
+      let index = 0;
+      const animateGrid = () => {
+        const batch = 4;
+        for (let b = 0; b < batch && index < tiles.length; b++) {
+          tiles[index].classList.add('solved');
+          index++;
+        }
+        if (index < tiles.length) {
+          requestAnimationFrame(animateGrid);
+        }
+      };
+      setTimeout(animateGrid, 250);
+    }
+  }
+
+  // =========================================================================
+  // 7. CTF Flag Verification Simulator with 3D Celebration
+  // =========================================================================
+  const flagInput = document.getElementById('flagInput');
+  const verifyFlagBtn = document.getElementById('verifyFlagBtn');
+  const flagOutput = document.getElementById('flagOutput');
+
+  if (verifyFlagBtn && flagInput && flagOutput) {
+    const validFlags = [
+      'flag{nischay_ctf_2024}',
+      'flag{nischay_cyber_pro}',
+      'flag{insane_nischay_flag}',
+      'flag{nj_sec_verified}'
+    ];
+
+    const checkFlag = () => {
+      const val = flagInput.value.trim().toLowerCase();
+      if (!val) {
+        flagOutput.className = 'flag-output error';
+        flagOutput.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Error: Flag payload cannot be empty.';
+        return;
+      }
+
+      if (validFlags.includes(val) || val.startsWith('flag{')) {
+        flagOutput.className = 'flag-output success';
+        flagOutput.innerHTML = '<i class="fa-solid fa-circle-check"></i> [ACCESS GRANTED]: Flag authenticated! Hash integrity validated.';
+
+        // Trigger 3D Cyber Core spin celebration if available!
+        if (triggerCelebrationSpin) {
+          triggerCelebrationSpin();
+        }
+      } else {
+        flagOutput.className = 'flag-output error';
+        flagOutput.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> [ACCESS DENIED]: Invalid signature. Try format: <code>flag{...}</code>';
+      }
+    };
+
+    verifyFlagBtn.addEventListener('click', checkFlag);
+    flagInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        checkFlag();
+      }
+    });
+  }
+
+  // =========================================================================
+  // 8. Quick Email Copy to Clipboard with Toast
+  // =========================================================================
+  const copyEmailBtn = document.getElementById('copyEmailBtn');
+  const toast = document.getElementById('toast');
+  const emailToCopy = 'jainnischay66@gmail.com';
+
+  if (copyEmailBtn && toast) {
+    copyEmailBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      navigator.clipboard.writeText(emailToCopy).then(() => {
+        toast.textContent = `Copied "${emailToCopy}" to clipboard!`;
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3200);
+      }).catch(() => {
+        prompt('Copy email:', emailToCopy);
+      });
+    });
+  }
+
+  // =========================================================================
+  // 9. Smooth Scroll on Anchor Links
+  // =========================================================================
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+});
+
+</script>
+</body>
+</html>
