@@ -2062,405 +2062,577 @@ input:focus-visible {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
   .glow-orb {
     animation: none;
+  }
+}
+
 /* --------------------------------------------------
-   17. Cyber Introduction Portal / Welcome Splash Screen
+   17. Professional Interactive Guided Showcase
    -------------------------------------------------- */
-.intro-portal {
+.hero-showcase-bar {
+  margin-bottom: 1.75rem;
+}
+
+.btn-showcase-launcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(14, 23, 42, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  padding: 0.65rem 1.25rem 0.65rem 0.85rem;
+  border-radius: 9999px;
+  color: var(--text-main);
+  cursor: pointer;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 240, 255, 0.15);
+  transition: all var(--trans-norm);
+}
+
+.btn-showcase-launcher:hover {
+  border-color: var(--accent-cyan);
+  background: rgba(18, 30, 56, 0.9);
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.7), 0 0 35px rgba(0, 240, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.showcase-icon-pulse {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00f0ff 0%, #00e599 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #050b14;
+  font-size: 0.85rem;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+  flex-shrink: 0;
+  transition: transform var(--trans-fast);
+}
+
+.btn-showcase-launcher:hover .showcase-icon-pulse {
+  transform: scale(1.08);
+}
+
+.showcase-btn-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.showcase-btn-text strong {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.showcase-btn-text small {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.showcase-badge-pill {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  margin-left: 0.5rem;
+}
+
+.nav-intro-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.28);
+  color: var(--accent-cyan);
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+
+.nav-intro-btn:hover {
+  background: rgba(0, 240, 255, 0.2);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+/* Fullscreen Showcase Overlay */
+.showcase-overlay {
   position: fixed;
   inset: 0;
   z-index: 99999;
-  background: radial-gradient(circle at 50% 40%, #0d172e 0%, #060913 75%, #03050a 100%);
+  background: rgba(5, 9, 18, 0.9);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-  overflow: hidden;
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
-              filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.intro-portal.exit {
   opacity: 0;
-  transform: scale(1.1) translateY(-20px);
-  filter: blur(14px);
-  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
 }
 
-.intro-grid-bg {
-  position: absolute;
-  inset: 0;
-  background-size: 44px 44px;
-  background-image: 
-    linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
-  opacity: 0.65;
-  pointer-events: none;
-  animation: gridPan 25s linear infinite;
+.showcase-overlay.active {
+  opacity: 1;
+  visibility: visible;
 }
 
-@keyframes gridPan {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(44px, 44px); }
-}
-
-.intro-glow-sphere {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 240, 255, 0.18) 0%, rgba(0, 229, 153, 0.08) 45%, transparent 70%);
-  filter: blur(50px);
-  pointer-events: none;
-  animation: spherePulse 6s ease-in-out infinite alternate;
-}
-
-@keyframes spherePulse {
-  0% { transform: scale(0.9); opacity: 0.6; }
-  100% { transform: scale(1.15); opacity: 0.95; }
-}
-
-.intro-card {
-  position: relative;
+.showcase-container {
   width: 100%;
-  max-width: 600px;
-  background: rgba(13, 21, 39, 0.88);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  max-width: 760px;
+  background: rgba(13, 21, 39, 0.94);
   border: 1px solid rgba(0, 240, 255, 0.3);
-  border-radius: 1.25rem;
-  box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.9), 0 0 45px rgba(0, 240, 255, 0.2);
-  padding: 2.25rem;
-  text-align: center;
-  animation: introCardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  transform-style: preserve-3d;
-}
-
-@keyframes introCardEntrance {
-  0% { opacity: 0; transform: perspective(1000px) rotateX(15deg) translateY(40px) scale(0.92); }
-  100% { opacity: 1; transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1); }
-}
-
-.intro-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(0, 240, 255, 0.08);
-  border: 1px solid rgba(0, 240, 255, 0.25);
-  color: var(--accent-cyan);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  padding: 0.35rem 0.85rem;
-  border-radius: 9999px;
-  margin-bottom: 1.25rem;
-}
-
-.intro-pulse {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent-cyan);
-  box-shadow: 0 0 10px var(--accent-cyan);
-  animation: pulseCyan 1.5s infinite;
-}
-
-.intro-brand-code {
-  font-family: var(--font-mono);
-  font-weight: 800;
-  font-size: 1.5rem;
-  color: var(--accent-cyan);
-  letter-spacing: -0.02em;
-  margin-bottom: 0.35rem;
-}
-
-.intro-name {
-  font-size: clamp(2rem, 4.5vw, 2.75rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: #fff;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #ffffff 30%, #00f0ff 70%, #00e599 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.intro-role {
-  font-size: 1.05rem;
-  color: var(--accent-teal);
-  font-weight: 600;
-  font-family: var(--font-mono);
-  margin-bottom: 0.25rem;
-}
-
-.intro-sub {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-bottom: 1.5rem;
-}
-
-/* Terminal Log Simulation */
-.intro-terminal-box {
-  background: #080d19;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.75rem;
-  overflow: hidden;
-  text-align: left;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  margin-bottom: 1.35rem;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
-}
-
-.intro-term-header {
-  background: #101625;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 0.45rem 0.85rem;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.intro-term-title {
-  margin-left: 0.5rem;
-  color: var(--text-dim);
-  font-size: 0.72rem;
-}
-
-.intro-term-body {
-  padding: 0.85rem 1rem;
+  border-radius: 1.35rem;
+  box-shadow: 0 30px 90px -20px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 240, 255, 0.2);
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  min-height: 100px;
-}
-
-.intro-log {
-  color: var(--text-muted);
-  opacity: 0.35;
-  transition: opacity 0.25s ease, color 0.25s ease;
-}
-
-.intro-log.active {
-  opacity: 1;
-  color: var(--text-main);
-}
-
-.intro-log.highlight {
-  color: var(--accent-teal);
-  font-weight: 600;
-}
-
-/* Progress bar */
-.intro-progress-bar-container {
-  width: 100%;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 999px;
   overflow: hidden;
-  margin-bottom: 0.45rem;
+  transform: perspective(1000px) scale(0.95) translateY(25px);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.intro-progress-bar {
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(90deg, #00f0ff 0%, #00e599 100%);
-  box-shadow: 0 0 12px var(--accent-cyan);
-  transition: width 0.15s ease-out;
+.showcase-overlay.active .showcase-container {
+  transform: perspective(1000px) scale(1) translateY(0);
 }
 
-.intro-status-row {
+.showcase-header {
+  background: rgba(18, 29, 52, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem 1.5rem;
   display: flex;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--text-dim);
-  margin-bottom: 1.5rem;
-}
-
-.intro-status-row span:first-child {
-  color: var(--accent-cyan);
-  font-weight: 700;
-}
-
-/* Actions */
-.intro-actions {
-  display: flex;
-  gap: 0.85rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 1.5rem;
-}
-
-.intro-enter-btn {
-  background: linear-gradient(135deg, #00f0ff 0%, #00e599 100%);
-  color: #050b14;
-  border: none;
-  font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: 0.04em;
-  padding: 0.8rem 1.6rem;
-  border-radius: 0.65rem;
-  cursor: pointer;
-  display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  box-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.showcase-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.showcase-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-teal);
+  background: rgba(0, 229, 153, 0.1);
+  border: 1px solid rgba(0, 229, 153, 0.25);
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+}
+
+.showcase-progress-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.progress-pill {
+  width: 28px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  cursor: pointer;
   transition: all var(--trans-norm);
 }
 
-.intro-enter-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 0 35px rgba(0, 240, 255, 0.55);
+.progress-pill.active {
+  width: 44px;
+  background: linear-gradient(90deg, #00f0ff 0%, #00e599 100%);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
 }
 
-.intro-enter-btn.ready-pulse {
-  animation: enterBtnGlow 1.8s infinite;
+.showcase-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-@keyframes enterBtnGlow {
-  0%, 100% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.4); transform: scale(1); }
-  50% { box-shadow: 0 0 35px rgba(0, 229, 153, 0.65); transform: scale(1.02); }
+.showcase-counter {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-cyan);
+  font-weight: 700;
 }
 
-.intro-contact-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-glass-bright);
-  color: var(--text-main);
+.showcase-close-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all var(--trans-fast);
+}
+
+.showcase-close-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.showcase-body {
+  padding: 2.25rem 2rem;
+  min-height: 380px;
+  position: relative;
+  overflow: hidden;
+}
+
+.showcase-slide {
+  display: none;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.showcase-slide.active {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-chapter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
   font-weight: 600;
-  font-size: 0.9rem;
-  padding: 0.8rem 1.25rem;
-  border-radius: 0.65rem;
+  color: var(--accent-cyan);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.85rem;
+}
+
+.slide-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.slide-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+}
+
+.slide-desc strong {
+  color: #fff;
+}
+
+.slide-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.slide-feature-card {
+  background: rgba(18, 29, 52, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.85rem;
+  padding: 1.15rem;
+  transition: border-color var(--trans-fast);
+}
+
+.slide-feature-card:hover {
+  border-color: rgba(0, 240, 255, 0.35);
+}
+
+.slide-f-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.65rem;
+}
+
+.slide-feature-card h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.35rem;
+}
+
+.slide-feature-card p {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.slide-tags-wall {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.slide-tag-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  color: var(--accent-cyan);
+  padding: 0.55rem 0.95rem;
+  border-radius: 0.6rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.slide-tag-item i {
+  color: var(--accent-teal);
+}
+
+.showcase-footer {
+  background: rgba(16, 26, 46, 0.85);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.showcase-nav-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-glass);
+  color: var(--text-main);
+  padding: 0.6rem 1.15rem;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   transition: all var(--trans-fast);
 }
 
-.intro-contact-btn:hover {
-  background: rgba(0, 240, 255, 0.12);
-  border-color: var(--accent-cyan);
-  color: var(--accent-cyan);
-  transform: translateY(-2px);
+.showcase-nav-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
-.intro-quick-socials {
-  display: flex;
-  justify-content: center;
-  gap: 1.15rem;
+.showcase-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
-.intro-quick-socials a {
-  width: 36px;
-  height: 36px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-glass);
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  transition: all var(--trans-fast);
-}
-
-.intro-quick-socials a:hover {
-  background: rgba(0, 240, 255, 0.15);
-  border-color: var(--accent-cyan);
-  color: var(--accent-cyan);
-  transform: translateY(-2px);
-}
-
-.replay-intro-btn {
-  background: none;
-  border: 1px solid var(--border-glass);
-  color: var(--text-dim);
-  padding: 0.25rem 0.65rem;
-  border-radius: 0.4rem;
-  font-size: 0.75rem;
-  font-family: var(--font-mono);
+.showcase-primary-btn {
+  background: linear-gradient(135deg, #00f0ff 0%, #00e599 100%);
+  border: none;
+  color: #050b14;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.65rem 1.35rem;
+  border-radius: 0.6rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.5rem;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+  transition: all var(--trans-norm);
+}
+
+.showcase-primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 28px rgba(0, 240, 255, 0.5);
+}
+
+.showcase-explore-btn {
+  background: rgba(0, 229, 153, 0.15);
+  border: 1px solid rgba(0, 229, 153, 0.4);
+  color: var(--accent-teal);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.65rem 1.35rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   transition: all var(--trans-fast);
 }
 
-.replay-intro-btn:hover {
-  color: var(--accent-cyan);
-  border-color: var(--accent-cyan);
-  background: rgba(0, 240, 255, 0.06);
+.showcase-explore-btn:hover {
+  background: var(--accent-teal);
+  color: #050b14;
+}
+
+@media (max-width: 768px) {
+  .slide-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .showcase-body {
+    padding: 1.5rem;
+    min-height: auto;
+  }
+  .showcase-progress-dots {
+    display: none;
+  }
 }
 
 </style>
 </head>
 <body>
-  <!-- 🚀 Futuristic Cyber Entrance / Intro Portal Screen -->
-  <div id="introPortal" class="intro-portal" role="dialog" aria-modal="true" aria-label="Welcome Portal">
-    <div class="intro-grid-bg"></div>
-    <div class="intro-glow-sphere"></div>
-
-    <div class="intro-card">
-      <div class="intro-badge">
-        <span class="intro-pulse"></span>
-        <span>SECURITY PROTOCOL: VERIFIED // WELCOME</span>
-      </div>
-
-      <div class="intro-terminal-glitch">
-        <div class="intro-brand-code">&lt;NJ /&gt;</div>
-        <h1 class="intro-name">NISCHAY JAIN</h1>
-        <p class="intro-role">Cybersecurity Enthusiast &bull; Competitive Programmer</p>
-        <p class="intro-sub">Newton School of Technology &bull; Rishihood University</p>
-      </div>
-
-      <div class="intro-terminal-box">
-        <div class="intro-term-header">
-          <span class="dot dot-red"></span>
-          <span class="dot dot-yellow"></span>
-          <span class="dot dot-green"></span>
-          <span class="intro-term-title">boot_sequence.sh</span>
+  <!-- ✦ Interactive Guided Showcase Modal (Part-by-part animated introduction) -->
+  <div id="showcaseModal" class="showcase-overlay" role="dialog" aria-modal="true" aria-label="Interactive Portfolio Showcase">
+    <div class="showcase-container">
+      <!-- Header with Chapter Progress -->
+      <div class="showcase-header">
+        <div class="showcase-brand">
+          <span class="brand-code">&lt;NJ /&gt;</span>
+          <span class="showcase-badge"><i class="fa-solid fa-sparkles"></i> Interactive Intro</span>
         </div>
-        <div class="intro-term-body">
-          <div class="intro-log" id="introLogLine1">&gt; Initializing algorithmic core...</div>
-          <div class="intro-log" id="introLogLine2">&gt; Syncing Codeforces stats (@insaneNischay)...</div>
-          <div class="intro-log" id="introLogLine3">&gt; Arming CTF defense vectors & picoGym...</div>
-          <div class="intro-log highlight" id="introLogLine4">&gt; [STATUS: READY] Welcome to my portfolio universe.</div>
+
+        <div class="showcase-progress-dots" id="showcaseProgressDots">
+          <span class="progress-pill active" data-step="0" title="Chapter 1: The Mindset"></span>
+          <span class="progress-pill" data-step="1" title="Chapter 2: Algorithms"></span>
+          <span class="progress-pill" data-step="2" title="Chapter 3: Security & CTF"></span>
+          <span class="progress-pill" data-step="3" title="Chapter 4: Projects & Impact"></span>
+        </div>
+
+        <div class="showcase-header-actions">
+          <span class="showcase-counter" id="showcaseCounter">01 / 04</span>
+          <button id="closeShowcaseBtn" class="showcase-close-btn" type="button" aria-label="Close Showcase">
+            <span>Exit to Website</span>
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
       </div>
 
-      <div class="intro-progress-bar-container">
-        <div class="intro-progress-bar" id="introProgressBar"></div>
-      </div>
-      <div class="intro-status-row">
-        <span id="introPercent">0%</span>
-        <span>SYSTEM ONLINE // CLICK BELOW TO ENTER</span>
+      <!-- Slides: Part-by-part Animated Journey -->
+      <div class="showcase-body">
+        <!-- Part 1: Identity & Engineering Mindset -->
+        <div class="showcase-slide active" data-index="0">
+          <div class="slide-chapter-badge"><i class="fa-solid fa-terminal"></i> CHAPTER 01 // THE ENGINEER & AMBITION</div>
+          <h2 class="slide-title">Deconstructing Complexity from First Principles</h2>
+          <p class="slide-desc">
+            I'm <strong>Nischay Jain</strong>, a first-year Computer Science undergraduate at 
+            <strong>Newton School of Technology (Rishihood University)</strong>. 
+            I bridge the gap between rigorous algorithmic problem-solving and offensive/defensive security architecture.
+          </p>
+
+          <div class="slide-cards-grid">
+            <div class="slide-feature-card">
+              <div class="slide-f-icon icon-cyan"><i class="fa-solid fa-code"></i></div>
+              <h4>Primary Stack</h4>
+              <p>High-efficiency C++20 (STL) and Python 3 for algorithms & security exploits.</p>
+            </div>
+            <div class="slide-feature-card">
+              <div class="slide-f-icon icon-teal"><i class="fa-solid fa-brain"></i></div>
+              <h4>First-Principles</h4>
+              <p>Breaking intricate systems down to hardware interactions and algorithmic limits.</p>
+            </div>
+            <div class="slide-feature-card">
+              <div class="slide-f-icon icon-purple"><i class="fa-solid fa-chess-knight"></i></div>
+              <h4>Beyond Code</h4>
+              <p>Active chess player (tactical precision) & technology content writer.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Part 2: Competitive Programming & Algorithms -->
+        <div class="showcase-slide" data-index="1">
+          <div class="slide-chapter-badge"><i class="fa-solid fa-chart-line"></i> CHAPTER 02 // ALGORITHMIC RIGOR</div>
+          <h2 class="slide-title">150+ Conquered Algorithmic Challenges</h2>
+          <p class="slide-desc">
+            Solving problems daily on Codeforces as <strong>@insaneNischay</strong> (Current: 483 Newbie &bull; actively preparing for ICPC & climbing toward Specialist/CM).
+          </p>
+
+          <div class="slide-tags-wall">
+            <div class="slide-tag-item"><i class="fa-solid fa-circle-check"></i> Dynamic Programming (30+ solved)</div>
+            <div class="slide-tag-item"><i class="fa-solid fa-circle-check"></i> Prefix Sums & Two Pointers (40+ solved)</div>
+            <div class="slide-tag-item"><i class="fa-solid fa-circle-check"></i> Bitwise Manipulations & Math (35+ solved)</div>
+            <div class="slide-tag-item"><i class="fa-solid fa-circle-check"></i> Greedy Strategies (45+ solved)</div>
+            <div class="slide-tag-item"><i class="fa-solid fa-circle-check"></i> Binary Search & Sliding Window</div>
+          </div>
+        </div>
+
+        <!-- Part 3: Cybersecurity & CTF -->
+        <div class="showcase-slide" data-index="2">
+          <div class="slide-chapter-badge"><i class="fa-solid fa-shield-halved"></i> CHAPTER 03 // CYBERSECURITY & CTF</div>
+          <h2 class="slide-title">Offensive Tactics & Forensic Defenses</h2>
+          <p class="slide-desc">
+            Active in team Capture The Flag competitions (including <strong>picoCTF</strong>). 
+            Investigating attack vectors, deciphering modular ciphers, and inspecting binary memory layouts.
+          </p>
+
+          <div class="slide-cards-grid">
+            <div class="slide-feature-card">
+              <div class="slide-f-icon icon-purple"><i class="fa-solid fa-key"></i></div>
+              <h4>Applied Crypto</h4>
+              <p>Cracking modular arithmetic, XOR ciphers, and entropy exploits.</p>
+            </div>
+            <div class="slide-feature-card">
+              <div class="slide-f-icon icon-cyan"><i class="fa-solid fa-bug"></i></div>
+              <h4>Reverse Engineering</h4>
+              <p>Analyzing decompiled control flows and extracting embedded verification flags.</p>
+            </div>
+            <div class="slide-feature-card">
+              <div class="slide-f-icon icon-orange"><i class="fa-solid fa-network-wired"></i></div>
+              <h4>Security Toolchain</h4>
+              <p>Hands-on practice with Wireshark, Burp Suite Community, and Linux / Kali.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Part 4: Real-World Solutions & Projects -->
+        <div class="showcase-slide" data-index="3">
+          <div class="slide-chapter-badge"><i class="fa-solid fa-diagram-project"></i> CHAPTER 04 // FEATURED ENGINEERING</div>
+          <h2 class="slide-title">Building Solutions with Real-World Value</h2>
+          <p class="slide-desc">
+            Bridging conceptual skills with practical applications through national hackathons and open-source development.
+          </p>
+
+          <div class="slide-cards-grid">
+            <div class="slide-feature-card" style="grid-column: span 2;">
+              <div class="slide-f-icon icon-teal"><i class="fa-solid fa-star"></i></div>
+              <h4>Smart India Hackathon '24 &mdash; Dementia Care Solution</h4>
+              <p>Support platform for dementia patients featuring safety geo-fencing, proactive telemetry alerts, and memory cues.</p>
+            </div>
+            <div class="slide-feature-card">
+              <div class="slide-f-icon icon-cyan"><i class="fa-solid fa-folder-tree"></i></div>
+              <h4>CP & CTF Vault</h4>
+              <p>Documented repository of 150+ modular solutions and competition write-ups.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="intro-actions">
-        <button id="enterPortfolioBtn" class="intro-enter-btn" type="button">
-          <span>ENTER PORTFOLIO</span>
-          <i class="fa-solid fa-arrow-right"></i>
+      <!-- Footer Controls -->
+      <div class="showcase-footer">
+        <button id="showcasePrevBtn" class="showcase-nav-btn" type="button" disabled>
+          <i class="fa-solid fa-arrow-left"></i> Previous
         </button>
-        <a href="mailto:jainnischay66@gmail.com" class="intro-contact-btn">
-          <i class="fa-regular fa-paper-plane"></i> Quick Hire / Contact
-        </a>
-      </div>
 
-      <div class="intro-quick-socials">
-        <a href="https://github.com/jainnischay66-ops" target="_blank" rel="noopener" title="GitHub"><i class="fa-brands fa-github"></i></a>
-        <a href="https://codeforces.com/profile/insaneNischay" target="_blank" rel="noopener" title="Codeforces"><i class="fa-solid fa-chart-simple"></i></a>
-        <a href="https://www.linkedin.com/in/nischay-jain-20b5aa40b" target="_blank" rel="noopener" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a href="mailto:jainnischay66@gmail.com" title="Email"><i class="fa-regular fa-envelope"></i></a>
+        <div class="showcase-next-group">
+          <button id="showcaseNextBtn" class="showcase-primary-btn" type="button">
+            <span>Next Chapter</span> <i class="fa-solid fa-arrow-right"></i>
+          </button>
+          <button id="showcaseExploreBtn" class="showcase-explore-btn" type="button" style="display: none;">
+            <i class="fa-solid fa-compass"></i> Explore Full Website
+          </button>
+        </div>
       </div>
     </div>
   </div>
+
   <!-- Ambient background glow elements -->
   <div class="glow-bg">
     <div class="glow-orb orb-1"></div>
@@ -2486,6 +2658,9 @@ input:focus-visible {
       </nav>
 
       <div class="nav-actions">
+        <button id="navShowcaseBtn" class="nav-intro-btn" type="button" title="Watch Interactive Intro Story">
+          <i class="fa-solid fa-sparkles"></i> <span>Intro Tour</span>
+        </button>
         <a href="mailto:jainnischay66@gmail.com" class="btn btn-sm btn-primary">
           <span>Get in Touch</span>
           <i class="fa-solid fa-arrow-right"></i>
@@ -2505,6 +2680,18 @@ input:focus-visible {
           <div class="status-pill">
             <span class="pulse-dot"></span>
             <span>Available for Internships & CTF Teams</span>
+          </div>
+
+          <!-- Showcase Tour Launcher Button -->
+          <div class="hero-showcase-bar">
+            <button id="openShowcaseBtn" class="btn-showcase-launcher" type="button" aria-label="Open Interactive Intro Story">
+              <span class="showcase-icon-pulse"><i class="fa-solid fa-play"></i></span>
+              <span class="showcase-btn-text">
+                <strong>Watch Interactive Intro</strong>
+                <small>Explore my story part-by-part &bull; 4 Chapters</small>
+              </span>
+              <span class="showcase-badge-pill">Start &rarr;</span>
+            </button>
           </div>
 
           <h1 class="hero-title">
@@ -3211,8 +3398,8 @@ input:focus-visible {
 
       <div class="footer-copy">
         <span>&copy; 2024–2026 Nischay Jain. Crafted with modern HTML5 & CSS3.</span>
-        <button id="replayIntroBtn" class="replay-intro-btn" type="button" title="Watch introductory cyber portal again">
-          <i class="fa-solid fa-rotate-right"></i> Replay Intro
+        <button id="footerShowcaseBtn" class="replay-intro-btn" type="button" title="Watch Interactive Intro Tour">
+          <i class="fa-solid fa-play"></i> Intro Tour
         </button>
       </div>
     </div>
@@ -3806,123 +3993,139 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 10. Futuristic Cyber Entrance / Intro Portal Controller
+  // 10. Professional Interactive Guided Showcase Controller
   // =========================================================================
-  const introPortal = document.getElementById('introPortal');
-  const enterBtn = document.getElementById('enterPortfolioBtn');
-  const progressBar = document.getElementById('introProgressBar');
-  const percentText = document.getElementById('introPercent');
-  const log1 = document.getElementById('introLogLine1');
-  const log2 = document.getElementById('introLogLine2');
-  const log3 = document.getElementById('introLogLine3');
-  const log4 = document.getElementById('introLogLine4');
-  const replayIntroBtn = document.getElementById('replayIntroBtn');
+  const showcaseModal = document.getElementById('showcaseModal');
+  const openShowcaseBtn = document.getElementById('openShowcaseBtn');
+  const navShowcaseBtn = document.getElementById('navShowcaseBtn');
+  const closeShowcaseBtn = document.getElementById('closeShowcaseBtn');
+  const showcasePrevBtn = document.getElementById('showcasePrevBtn');
+  const showcaseNextBtn = document.getElementById('showcaseNextBtn');
+  const showcaseExploreBtn = document.getElementById('showcaseExploreBtn');
+  const showcaseCounter = document.getElementById('showcaseCounter');
+  const progressPills = document.querySelectorAll('.progress-pill');
+  const slides = document.querySelectorAll('.showcase-slide');
 
-  // Synthesize futuristic cyber audio feedback via Web Audio API
-  const playCyberChime = (highPitch = false) => {
-    try {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (!AudioCtx) return;
-      const ctx = new AudioCtx();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
+  let currentSlideIndex = 0;
+  const totalSlides = slides.length;
 
-      const now = ctx.currentTime;
-      osc.type = highPitch ? 'triangle' : 'sine';
-      osc.frequency.setValueAtTime(highPitch ? 587.33 : 329.63, now);
-      osc.frequency.exponentialRampToValueAtTime(highPitch ? 880 : 659.25, now + 0.28);
+  const updateSlideView = (index) => {
+    if (index < 0 || index >= totalSlides) return;
+    currentSlideIndex = index;
 
-      gain.gain.setValueAtTime(0.06, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(now);
-      osc.stop(now + 0.35);
-    } catch (e) {}
-  };
-
-  if (introPortal && progressBar && percentText) {
-    let progress = 0;
-    let isEntered = false;
-
-    // Animate progress loading sequence
-    const loadInterval = setInterval(() => {
-      progress += Math.floor(Math.random() * 8) + 4;
-      if (progress >= 100) {
-        progress = 100;
-        clearInterval(loadInterval);
-
-        if (enterBtn) {
-          enterBtn.classList.add('ready-pulse');
-        }
-      }
-
-      progressBar.style.width = `${progress}%`;
-      percentText.textContent = `${progress}%`;
-
-      if (progress >= 20 && log1) log1.classList.add('active');
-      if (progress >= 50 && log2) log2.classList.add('active');
-      if (progress >= 75 && log3) log3.classList.add('active');
-      if (progress >= 100 && log4) {
-        log4.classList.add('active');
-        playCyberChime(false);
-      }
-    }, 45);
-
-    const closeIntroPortal = () => {
-      if (isEntered) return;
-      isEntered = true;
-      playCyberChime(true);
-      introPortal.classList.add('exit');
-
-      setTimeout(() => {
-        introPortal.style.display = 'none';
-      }, 750);
-    };
-
-    if (enterBtn) {
-      enterBtn.addEventListener('click', closeIntroPortal);
-    }
-
-    // Allow Enter / Space key to enter
-    window.addEventListener('keydown', (e) => {
-      if ((e.key === 'Enter' || e.code === 'Space') && !isEntered) {
-        if (document.activeElement?.tagName !== 'INPUT') {
-          closeIntroPortal();
-        }
+    // Update slides visibility
+    slides.forEach((slide, idx) => {
+      if (idx === currentSlideIndex) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
       }
     });
 
-    // Replay intro portal from footer
-    if (replayIntroBtn) {
-      replayIntroBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        isEntered = false;
-        introPortal.style.display = 'flex';
-        introPortal.classList.remove('exit');
-        progress = 0;
-        progressBar.style.width = '0%';
-        percentText.textContent = '0%';
-        [log1, log2, log3, log4].forEach(l => l && l.classList.remove('active'));
+    // Update progress indicator pills
+    progressPills.forEach((pill, idx) => {
+      if (idx === currentSlideIndex) {
+        pill.classList.add('active');
+      } else {
+        pill.classList.remove('active');
+      }
+    });
 
-        const replayInterval = setInterval(() => {
-          progress += 8;
-          if (progress >= 100) {
-            progress = 100;
-            clearInterval(replayInterval);
-            playCyberChime(false);
-          }
-          progressBar.style.width = `${progress}%`;
-          percentText.textContent = `${progress}%`;
-          if (progress >= 25 && log1) log1.classList.add('active');
-          if (progress >= 50 && log2) log2.classList.add('active');
-          if (progress >= 75 && log3) log3.classList.add('active');
-          if (progress >= 100 && log4) log4.classList.add('active');
-        }, 35);
-      });
+    // Update counter
+    if (showcaseCounter) {
+      showcaseCounter.textContent = `0${currentSlideIndex + 1} / 0${totalSlides}`;
     }
+
+    // Toggle button states
+    if (showcasePrevBtn) {
+      showcasePrevBtn.disabled = currentSlideIndex === 0;
+    }
+
+    if (currentSlideIndex === totalSlides - 1) {
+      if (showcaseNextBtn) showcaseNextBtn.style.display = 'none';
+      if (showcaseExploreBtn) showcaseExploreBtn.style.display = 'inline-flex';
+    } else {
+      if (showcaseNextBtn) showcaseNextBtn.style.display = 'inline-flex';
+      if (showcaseExploreBtn) showcaseExploreBtn.style.display = 'none';
+    }
+  };
+
+  const openShowcase = () => {
+    if (!showcaseModal) return;
+    showcaseModal.style.display = 'flex';
+    requestAnimationFrame(() => {
+      showcaseModal.classList.add('active');
+    });
+    updateSlideView(0);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeShowcase = () => {
+    if (!showcaseModal) return;
+    showcaseModal.classList.remove('active');
+    setTimeout(() => {
+      showcaseModal.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 400);
+  };
+
+  if (openShowcaseBtn) openShowcaseBtn.addEventListener('click', openShowcase);
+  if (navShowcaseBtn) navShowcaseBtn.addEventListener('click', openShowcase);
+  const footerShowcaseBtn = document.getElementById('footerShowcaseBtn');
+  if (footerShowcaseBtn) footerShowcaseBtn.addEventListener('click', openShowcase);
+  if (closeShowcaseBtn) closeShowcaseBtn.addEventListener('click', closeShowcase);
+  if (showcaseExploreBtn) showcaseExploreBtn.addEventListener('click', closeShowcase);
+
+  if (showcaseNextBtn) {
+    showcaseNextBtn.addEventListener('click', () => {
+      if (currentSlideIndex < totalSlides - 1) {
+        updateSlideView(currentSlideIndex + 1);
+      }
+    });
   }
+
+  if (showcasePrevBtn) {
+    showcasePrevBtn.addEventListener('click', () => {
+      if (currentSlideIndex > 0) {
+        updateSlideView(currentSlideIndex - 1);
+      }
+    });
+  }
+
+  // Clickable progress pills
+  progressPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      const step = parseInt(pill.getAttribute('data-step'), 10);
+      if (!isNaN(step)) updateSlideView(step);
+    });
+  });
+
+  // Keyboard navigation when modal is open
+  window.addEventListener('keydown', (e) => {
+    if (!showcaseModal || !showcaseModal.classList.contains('active')) return;
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      if (currentSlideIndex < totalSlides - 1) {
+        updateSlideView(currentSlideIndex + 1);
+      } else {
+        closeShowcase();
+      }
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      if (currentSlideIndex > 0) {
+        updateSlideView(currentSlideIndex - 1);
+      }
+    } else if (e.key === 'Escape') {
+      closeShowcase();
+    }
+  });
+
+  // Close when clicking outside dialog container
+  showcaseModal.addEventListener('click', (e) => {
+    if (e.target === showcaseModal) {
+      closeShowcase();
+    }
+  });
 });
 
 </script>
