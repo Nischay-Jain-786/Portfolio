@@ -2487,9 +2487,590 @@ input:focus-visible {
   }
 }
 
+/* --------------------------------------------------
+   18. Cinematic YouTube-Style Motion Graphics Video Intro
+   -------------------------------------------------- */
+body.intro-active {
+  overflow: hidden !important;
+  height: 100vh !important;
+  width: 100vw !important;
+}
+
+body.intro-active #portfolioRoot {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.website-wrapper {
+  opacity: 0;
+  transform: scale(0.96);
+  filter: blur(14px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.website-wrapper.visible {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0px);
+}
+
+.yt-intro-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: #02050b;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3.5rem 2rem 2.5rem;
+  overflow: hidden;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.yt-intro-stage.exit {
+  opacity: 0;
+  transform: scale(1.1);
+  pointer-events: none;
+}
+
+/* Anamorphic 21:9 Cinema Letterbox Bars */
+.yt-cinema-bar {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 48px;
+  background: #000;
+  z-index: 50;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.yt-cinema-bar.top { top: 0; border-bottom: 1px solid rgba(0, 240, 255, 0.2); }
+.yt-cinema-bar.bottom { bottom: 0; border-top: 1px solid rgba(0, 240, 255, 0.2); }
+
+.yt-intro-stage.exit .yt-cinema-bar.top { transform: translateY(-100%); }
+.yt-intro-stage.exit .yt-cinema-bar.bottom { transform: translateY(100%); }
+
+#introCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.yt-intro-hud-top {
+  position: relative;
+  z-index: 60;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+.yt-rec-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #ff3366;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(255, 51, 102, 0.6);
+}
+
+.rec-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #ff3366;
+  box-shadow: 0 0 14px #ff3366;
+  animation: recBlink 1s infinite alternate;
+}
+
+@keyframes recBlink {
+  0% { opacity: 0.2; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1.1); }
+}
+
+.yt-quality-tag {
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  color: var(--accent-cyan);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+
+.yt-hud-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.yt-audio-toggle-btn,
+.yt-skip-btn {
+  background: rgba(14, 23, 42, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  color: var(--text-main);
+  padding: 0.45rem 1.1rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--trans-fast);
+}
+
+.yt-audio-toggle-btn:hover,
+.yt-skip-btn:hover {
+  background: rgba(0, 240, 255, 0.22);
+  border-color: var(--accent-cyan);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+.yt-intro-center {
+  position: relative;
+  z-index: 60;
+  text-align: center;
+  width: 100%;
+  max-width: 950px;
+  margin: auto;
+  perspective: 1200px;
+}
+
+.yt-scene {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.yt-scene.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Scene 1: Initializing & Radar Boot */
+.yt-vortex-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.yt-radar-wrapper {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.yt-cyber-ring {
+  position: absolute;
+  inset: 0;
+  border: 2px dashed var(--accent-cyan);
+  border-top-color: var(--accent-teal);
+  border-radius: 50%;
+  animation: cyberSpin 2s linear infinite;
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+}
+
+.yt-cyber-ring-inner {
+  position: absolute;
+  inset: 18px;
+  border: 2px dotted #ff3366;
+  border-radius: 50%;
+  animation: cyberSpinReverse 2.5s linear infinite;
+}
+
+.yt-radar-crosshair {
+  color: var(--accent-cyan);
+  font-size: 1.5rem;
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes cyberSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes cyberSpinReverse {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.yt-init-text {
+  font-family: var(--font-mono);
+  color: var(--accent-cyan);
+  font-size: 1.1rem;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  text-shadow: 0 0 15px rgba(0, 240, 255, 0.8);
+}
+
+.yt-init-badge {
+  background: rgba(0, 229, 153, 0.15);
+  border: 1px solid rgba(0, 229, 153, 0.4);
+  color: var(--accent-teal);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.3rem 0.9rem;
+  border-radius: 9999px;
+  letter-spacing: 0.15em;
+  box-shadow: 0 0 15px rgba(0, 229, 153, 0.3);
+}
+
+/* Scene 2: 3D Glitch Title Slam */
+.yt-name-slam {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.yt-glitch-title {
+  font-size: clamp(3.2rem, 10vw, 7.2rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: #fff;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 0 40px rgba(0, 240, 255, 0.9), 0 0 80px rgba(0, 229, 153, 0.5);
+  animation: glitchSlam 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.yt-glitch-title::before,
+.yt-glitch-title::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+.yt-glitch-title::before {
+  left: -3px;
+  text-shadow: 3px 0 #ff0055;
+  animation: glitchGhost1 2s infinite ease;
+}
+
+.yt-glitch-title::after {
+  left: 3px;
+  text-shadow: -3px 0 #00f0ff;
+  animation: glitchGhost2 2.5s infinite ease;
+}
+
+@keyframes glitchGhost1 {
+  0%, 100% { opacity: 0.3; transform: translate(0, 0); }
+  50% { opacity: 0.8; transform: translate(-4px, 2px); }
+  52% { opacity: 0.2; transform: translate(3px, -2px); }
+}
+
+@keyframes glitchGhost2 {
+  0%, 100% { opacity: 0.3; transform: translate(0, 0); }
+  45% { opacity: 0.7; transform: translate(4px, -1px); }
+  48% { opacity: 0.2; transform: translate(-3px, 2px); }
+}
+
+@keyframes glitchSlam {
+  0% { transform: scale(3.2) translateY(-60px); opacity: 0; filter: blur(24px); }
+  60% { transform: scale(0.96); opacity: 1; filter: blur(0px); }
+  100% { transform: scale(1); }
+}
+
+.yt-sub-banner {
+  font-family: var(--font-mono);
+  font-size: clamp(0.85rem, 2vw, 1.35rem);
+  font-weight: 700;
+  color: var(--accent-teal);
+  letter-spacing: 0.2em;
+  margin-top: 1.2rem;
+  background: rgba(0, 229, 153, 0.1);
+  padding: 0.45rem 1.8rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 229, 153, 0.35);
+  box-shadow: 0 0 30px rgba(0, 229, 153, 0.3);
+  animation: fadeInSubtitle 0.7s 0.15s ease backwards;
+}
+
+@keyframes fadeInSubtitle {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Scene 3: Kinetic Feature Reel */
+.yt-kinetic-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.yt-kinetic-item {
+  background: rgba(14, 23, 42, 0.92);
+  border: 1px solid rgba(0, 240, 255, 0.45);
+  padding: 0.95rem 2.2rem;
+  border-radius: 1rem;
+  font-family: var(--font-mono);
+  font-size: clamp(0.95rem, 2vw, 1.3rem);
+  font-weight: 700;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 240, 255, 0.25);
+  transform: perspective(1000px) rotateX(25deg) translateY(50px);
+  opacity: 0;
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.yt-kinetic-item.show {
+  transform: perspective(1000px) rotateX(0deg) translateY(0);
+  opacity: 1;
+}
+
+.yt-kinetic-item i {
+  color: var(--accent-cyan);
+  font-size: 1.2em;
+}
+
+/* Scene 4: Warp Flash */
+.yt-warp-flash {
+  position: absolute;
+  inset: -100px;
+  background: radial-gradient(circle, #fff 0%, rgba(0, 240, 255, 0.9) 35%, rgba(0, 229, 153, 0.4) 65%, transparent 85%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-out;
+  z-index: 70;
+}
+
+.yt-warp-flash.flash {
+  opacity: 1;
+}
+
+/* HUD Bottom: Scrubber Bar & Visualizer */
+.yt-intro-hud-bottom {
+  position: relative;
+  z-index: 60;
+  width: 100%;
+  max-width: 750px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.yt-scrubber-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.yt-scrubber-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.yt-scrubber-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #00f0ff, #00e599, #ec4899);
+  box-shadow: 0 0 12px #00f0ff;
+  transition: width 0.08s linear;
+}
+
+.yt-scrubber-meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+.yt-visualizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 28px;
+}
+
+.yt-v-bar {
+  width: 4px;
+  background: var(--accent-cyan);
+  border-radius: 2px;
+  height: 4px;
+  transition: height 0.08s ease;
+  box-shadow: 0 0 8px var(--accent-cyan);
+}
+
+.yt-sound-hint {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--accent-cyan);
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+  animation: pulse 1.5s infinite alternate;
+}
+
+.nav-replay-intro-btn {
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all var(--trans-fast);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+}
+
+.nav-replay-intro-btn:hover {
+  background: rgba(0, 240, 255, 0.25);
+  border-color: var(--accent-cyan);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+}
+
+.hero-tour-sublink {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+  transition: color var(--trans-fast);
+}
+
+.hero-tour-sublink:hover {
+  color: var(--accent-cyan);
+}
+
 </style>
 </head>
-<body>
+<body class="intro-active">
+  <!-- 🎬 YouTube-Style Cinematic Motion Graphics Video Intro Stage -->
+  <div id="ytCinematicIntro" class="yt-intro-stage" role="dialog" aria-modal="true" aria-label="Cinematic Portfolio Intro">
+    <!-- Anamorphic Letterbox Cinema Bars -->
+    <div class="yt-cinema-bar top"></div>
+    <div class="yt-cinema-bar bottom"></div>
+
+    <canvas id="introCanvas"></canvas>
+    <div class="yt-warp-flash" id="ytWarpFlash"></div>
+
+    <!-- HUD Top Bar -->
+    <div class="yt-intro-hud-top">
+      <div class="yt-rec-indicator">
+        <span class="rec-dot"></span>
+        <span>REC &bull; <span id="ytHudTimer">00:00:00</span></span>
+        <span class="yt-quality-tag">4K 60FPS // SEC_CORE</span>
+      </div>
+
+      <div class="yt-hud-controls">
+        <button id="ytAudioToggleBtn" class="yt-audio-toggle-btn" type="button" title="Toggle Cinematic Sound">
+          <i class="fa-solid fa-volume-high" id="ytAudioIcon"></i>
+          <span id="ytAudioLabel">SOUND: ON</span>
+        </button>
+        <button id="ytSkipBtn" class="yt-skip-btn" type="button" title="Skip directly to website">
+          <span>SKIP INTRO [ESC]</span>
+          <i class="fa-solid fa-forward-step"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Center Motion Stage (Scenes) -->
+    <div class="yt-intro-center">
+      <!-- Scene 1: Digital Core Boot (0s - 1.2s) -->
+      <div class="yt-scene yt-scene-1 active" id="ytScene1">
+        <div class="yt-vortex-loader">
+          <div class="yt-radar-wrapper">
+            <div class="yt-cyber-ring"></div>
+            <div class="yt-cyber-ring-inner"></div>
+            <i class="fa-solid fa-crosshairs yt-radar-crosshair"></i>
+          </div>
+          <div class="yt-init-text">&gt; VERIFYING OPERATOR BIOMETRICS &bull; NISCHAY JAIN</div>
+          <div class="yt-init-badge">[ CLEARANCE LEVEL: ROOT // ACCESS GRANTED ]</div>
+        </div>
+      </div>
+
+      <!-- Scene 2: Epic 3D Glitch Title Slam (1.2s - 3.4s) -->
+      <div class="yt-scene yt-scene-2" id="ytScene2">
+        <div class="yt-name-slam">
+          <h1 class="yt-glitch-title" data-text="NISCHAY JAIN">NISCHAY JAIN</h1>
+          <div class="yt-sub-banner">CYBERSECURITY // COMPETITIVE PROGRAMMER // CTF HACKER</div>
+        </div>
+      </div>
+
+      <!-- Scene 3: Kinetic Feature Reel (3.4s - 5.2s) -->
+      <div class="yt-scene yt-scene-3" id="ytScene3">
+        <div class="yt-kinetic-cards">
+          <div class="yt-kinetic-item" id="kCard1"><i class="fa-solid fa-bolt"></i> 150+ Codeforces &amp; LeetCode Conquests (@insaneNischay)</div>
+          <div class="yt-kinetic-item" id="kCard2"><i class="fa-solid fa-shield-halved"></i> picoCTF Competitor &bull; Reverse Engineering &amp; Binary Exploitation</div>
+          <div class="yt-kinetic-item" id="kCard3"><i class="fa-solid fa-graduation-cap"></i> Newton School of Technology &bull; CS &amp; Systems Architecture</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HUD Bottom: Scrubber Bar & Visualizer -->
+    <div class="yt-intro-hud-bottom">
+      <div class="yt-scrubber-container">
+        <div class="yt-scrubber-track">
+          <div class="yt-scrubber-fill" id="ytScrubberFill"></div>
+        </div>
+        <div class="yt-scrubber-meta">
+          <span id="ytTimeElapsed">0:00</span>
+          <span>4K CYBER_TRAILER &bull; DOLBY ATMOS</span>
+          <span>0:06</span>
+        </div>
+      </div>
+      <div class="yt-visualizer" id="ytVisualizer"></div>
+      <div class="yt-sound-hint" id="ytSoundHint">&#9654; Click anywhere for full cinematic sound &bull; Press [Esc] to skip</div>
+    </div>
+  </div>
+
+  <!-- Main Website Container (Completely hidden while intro is active) -->
+  <div id="portfolioRoot" class="website-wrapper" style="display: none;">
+
   <!-- ✦ Interactive Guided Showcase Modal (Part-by-part animated introduction) -->
   <div id="showcaseModal" class="showcase-overlay" role="dialog" aria-modal="true" aria-label="Interactive Portfolio Showcase">
     <div class="showcase-container">
@@ -2658,8 +3239,11 @@ input:focus-visible {
       </nav>
 
       <div class="nav-actions">
-        <button id="navShowcaseBtn" class="nav-intro-btn" type="button" title="Watch Interactive Intro Story">
-          <i class="fa-solid fa-sparkles"></i> <span>Intro Tour</span>
+        <button id="navReplayYtIntroBtn" class="nav-replay-intro-btn" type="button" title="Watch Cinematic Video Intro">
+          <i class="fa-solid fa-film"></i> <span>Video Intro</span>
+        </button>
+        <button id="navShowcaseBtn" class="nav-intro-btn" type="button" title="Watch Interactive Guided Tour">
+          <i class="fa-solid fa-sparkles"></i> <span>Guided Tour</span>
         </button>
         <a href="mailto:jainnischay66@gmail.com" class="btn btn-sm btn-primary">
           <span>Get in Touch</span>
@@ -2682,15 +3266,18 @@ input:focus-visible {
             <span>Available for Internships & CTF Teams</span>
           </div>
 
-          <!-- Showcase Tour Launcher Button -->
+          <!-- Cinematic Video Intro Launcher Button -->
           <div class="hero-showcase-bar">
-            <button id="openShowcaseBtn" class="btn-showcase-launcher" type="button" aria-label="Open Interactive Intro Story">
-              <span class="showcase-icon-pulse"><i class="fa-solid fa-play"></i></span>
+            <button id="heroPlayIntroBtn" class="btn-showcase-launcher" type="button" aria-label="Play Cinematic Video Intro">
+              <span class="showcase-icon-pulse"><i class="fa-solid fa-film"></i></span>
               <span class="showcase-btn-text">
-                <strong>Watch Interactive Intro</strong>
-                <small>Explore my story part-by-part &bull; 4 Chapters</small>
+                <strong>Play Cinematic Video Intro</strong>
+                <small>4K Motion Graphics &bull; Cyber Synthesizer &bull; Full Experience</small>
               </span>
-              <span class="showcase-badge-pill">Start &rarr;</span>
+              <span class="showcase-badge-pill">Play &#9654;</span>
+            </button>
+            <button id="openShowcaseBtn" class="hero-tour-sublink" type="button" title="Open Guided Tour">
+              <i class="fa-solid fa-sparkles"></i> Or explore 4-chapter guided tour
             </button>
           </div>
 
@@ -3398,12 +3985,16 @@ input:focus-visible {
 
       <div class="footer-copy">
         <span>&copy; 2024–2026 Nischay Jain. Crafted with modern HTML5 & CSS3.</span>
-        <button id="footerShowcaseBtn" class="replay-intro-btn" type="button" title="Watch Interactive Intro Tour">
-          <i class="fa-solid fa-play"></i> Intro Tour
+        <button id="footerReplayYtIntroBtn" class="replay-intro-btn" type="button" title="Replay Cinematic Video Intro">
+          <i class="fa-solid fa-film"></i> Video Intro
+        </button>
+        <button id="footerShowcaseBtn" class="replay-intro-btn" type="button" title="Watch Interactive Guided Tour">
+          <i class="fa-solid fa-play"></i> Guided Tour
         </button>
       </div>
     </div>
   </footer>
+  </div> <!-- End #portfolioRoot -->
 
   <!-- Toast notification for copy action -->
   <div class="toast" id="toast">Email copied to clipboard!</div>
@@ -4126,6 +4717,398 @@ document.addEventListener('DOMContentLoaded', () => {
       closeShowcase();
     }
   });
+
+  // =========================================================================
+  // 11. Cinematic YouTube-Style Motion Graphics Video Intro Director
+  // =========================================================================
+  const ytIntroStage = document.getElementById('ytCinematicIntro');
+  const portfolioRoot = document.getElementById('portfolioRoot');
+  const introCanvas = document.getElementById('introCanvas');
+  const ytSkipBtn = document.getElementById('ytSkipBtn');
+  const ytAudioToggleBtn = document.getElementById('ytAudioToggleBtn');
+  const ytAudioIcon = document.getElementById('ytAudioIcon');
+  const ytAudioLabel = document.getElementById('ytAudioLabel');
+  const ytSoundHint = document.getElementById('ytSoundHint');
+  const ytWarpFlash = document.getElementById('ytWarpFlash');
+  const navReplayYtIntroBtn = document.getElementById('navReplayYtIntroBtn');
+  const footerReplayYtIntroBtn = document.getElementById('footerReplayYtIntroBtn');
+  const heroPlayIntroBtn = document.getElementById('heroPlayIntroBtn');
+
+  const ytScene1 = document.getElementById('ytScene1');
+  const ytScene2 = document.getElementById('ytScene2');
+  const ytScene3 = document.getElementById('ytScene3');
+  const kCard1 = document.getElementById('kCard1');
+  const kCard2 = document.getElementById('kCard2');
+  const kCard3 = document.getElementById('kCard3');
+  const ytVisualizer = document.getElementById('ytVisualizer');
+  const ytScrubberFill = document.getElementById('ytScrubberFill');
+  const ytTimeElapsed = document.getElementById('ytTimeElapsed');
+  const ytHudTimer = document.getElementById('ytHudTimer');
+
+  let audioEnabled = true;
+  let audioCtx = null;
+  let introTimerIds = [];
+  let isIntroPlaying = true;
+  let warpFactor = 1;
+  let introStartTime = performance.now();
+  const TOTAL_INTRO_DURATION = 6200;
+
+  // Generate 28 visualizer bars
+  if (ytVisualizer) {
+    ytVisualizer.innerHTML = '';
+    for (let i = 0; i < 28; i++) {
+      const bar = document.createElement('div');
+      bar.className = 'yt-v-bar';
+      ytVisualizer.appendChild(bar);
+    }
+  }
+
+  // Web Audio API Sound Engine (Cinematic trailer effects)
+  const initAudio = () => {
+    if (!audioCtx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) audioCtx = new AudioCtx();
+    }
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+  };
+
+  const playBassDrop = () => {
+    if (!audioEnabled || !audioCtx) return;
+    try {
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(140, now);
+      osc.frequency.exponentialRampToValueAtTime(32, now + 1.2);
+
+      gain.gain.setValueAtTime(0.35, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 1.2);
+    } catch (e) {}
+  };
+
+  const playLaserZap = () => {
+    if (!audioEnabled || !audioCtx) return;
+    try {
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(1200, now);
+      osc.frequency.exponentialRampToValueAtTime(180, now + 0.35);
+
+      gain.gain.setValueAtTime(0.12, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.35);
+    } catch (e) {}
+  };
+
+  const playCardWhoosh = (pitch = 440) => {
+    if (!audioEnabled || !audioCtx) return;
+    try {
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(pitch, now);
+      osc.frequency.exponentialRampToValueAtTime(pitch * 1.8, now + 0.22);
+
+      gain.gain.setValueAtTime(0.1, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.25);
+    } catch (e) {}
+  };
+
+  const playWarpSonic = () => {
+    if (!audioEnabled || !audioCtx) return;
+    try {
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(150, now);
+      osc.frequency.exponentialRampToValueAtTime(1600, now + 0.7);
+
+      gain.gain.setValueAtTime(0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.75);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.75);
+    } catch (e) {}
+  };
+
+  // 3D Warp Canvas & Perspective Cyber Grid Animation
+  if (introCanvas) {
+    const ctx = introCanvas.getContext('2d');
+    let width = introCanvas.width = window.innerWidth;
+    let height = introCanvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = introCanvas.width = window.innerWidth;
+      height = introCanvas.height = window.innerHeight;
+    });
+
+    const numStars = 420;
+    const stars = [];
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: (Math.random() - 0.5) * width * 2,
+        y: (Math.random() - 0.5) * height * 2,
+        z: Math.random() * width,
+        pz: width
+      });
+    }
+
+    const renderWarp = () => {
+      if (!isIntroPlaying && ytIntroStage && ytIntroStage.classList.contains('exit')) return;
+      ctx.fillStyle = 'rgba(2, 5, 11, 0.38)';
+      ctx.fillRect(0, 0, width, height);
+
+      // Draw 3D Cyber Perspective Grid Floor
+      const horizonY = height * 0.64;
+      ctx.strokeStyle = 'rgba(0, 240, 255, 0.2)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, horizonY);
+      ctx.lineTo(width, horizonY);
+      ctx.stroke();
+
+      const gridOffset = (performance.now() * 0.08 * warpFactor) % 40;
+      for (let y = horizonY + 8; y < height; y += (y - horizonY) * 0.32 + 8) {
+        const yPos = y + gridOffset * ((y - horizonY) / (height - horizonY));
+        if (yPos < height) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(0, 240, 255, ${((yPos - horizonY) / (height - horizonY)) * 0.25})`;
+          ctx.moveTo(0, yPos);
+          ctx.lineTo(width, yPos);
+          ctx.stroke();
+        }
+      }
+
+      // Perspective Grid Verticals
+      const cx = width / 2;
+      const cy = height / 2;
+      for (let vx = -width; vx <= width * 2; vx += width * 0.08) {
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(0, 229, 153, 0.12)';
+        ctx.moveTo(cx, horizonY);
+        ctx.lineTo(vx, height);
+        ctx.stroke();
+      }
+
+      // 3D Starfield Warp Tunnel
+      const speed = 7 * warpFactor;
+      for (let i = 0; i < numStars; i++) {
+        const star = stars[i];
+        star.pz = star.z;
+        star.z -= speed;
+
+        if (star.z <= 0) {
+          star.x = (Math.random() - 0.5) * width * 2;
+          star.y = (Math.random() - 0.5) * height * 2;
+          star.z = width;
+          star.pz = width;
+        }
+
+        const k = 180 / star.z;
+        const px = star.x * k + cx;
+        const py = star.y * k + cy;
+
+        const pk = 180 / star.pz;
+        const prevX = star.x * pk + cx;
+        const prevY = star.y * pk + cy;
+
+        if (px >= 0 && px < width && py >= 0 && py < height) {
+          const size = Math.min((1 - star.z / width) * 2.8 * (warpFactor > 2 ? 1.6 : 1), 6);
+          ctx.beginPath();
+          ctx.strokeStyle = warpFactor > 4 ? '#00f0ff' : (warpFactor > 2 ? '#00e599' : '#38bdf8');
+          ctx.lineWidth = size;
+          ctx.moveTo(prevX, prevY);
+          ctx.lineTo(px, py);
+          ctx.stroke();
+        }
+      }
+
+      // Live Scrubber Progress Bar and Timers
+      if (isIntroPlaying) {
+        const elapsed = Math.min(performance.now() - introStartTime, TOTAL_INTRO_DURATION);
+        const pct = (elapsed / TOTAL_INTRO_DURATION) * 100;
+        if (ytScrubberFill) ytScrubberFill.style.width = `${pct}%`;
+        const sec = Math.floor(elapsed / 1000);
+        const ms = Math.floor((elapsed % 1000) / 10);
+        if (ytTimeElapsed) ytTimeElapsed.textContent = `0:0${sec}`;
+        if (ytHudTimer) ytHudTimer.textContent = `00:00:0${sec}.${ms < 10 ? '0' + ms : ms}`;
+      }
+
+      // Animate visualizer bars
+      if (ytVisualizer) {
+        const bars = ytVisualizer.children;
+        for (let b = 0; b < bars.length; b++) {
+          const h = isIntroPlaying ? Math.floor(Math.random() * 24 + 4) : 4;
+          bars[b].style.height = `${h}px`;
+        }
+      }
+
+      requestAnimationFrame(renderWarp);
+    };
+    renderWarp();
+  }
+
+  // Cinematic Timeline Director
+  const clearTimeline = () => {
+    introTimerIds.forEach(id => clearTimeout(id));
+    introTimerIds = [];
+  };
+
+  const schedule = (fn, delay) => {
+    introTimerIds.push(setTimeout(fn, delay));
+  };
+
+  const completeIntro = () => {
+    clearTimeline();
+    isIntroPlaying = false;
+    warpFactor = 1;
+    document.body.classList.remove('intro-active');
+
+    if (ytIntroStage) {
+      ytIntroStage.classList.add('exit');
+      setTimeout(() => {
+        ytIntroStage.style.display = 'none';
+      }, 750);
+    }
+
+    if (portfolioRoot) {
+      portfolioRoot.style.display = 'block';
+      setTimeout(() => {
+        portfolioRoot.classList.add('visible');
+      }, 50);
+    }
+  };
+
+  const playIntroSequence = () => {
+    clearTimeline();
+    isIntroPlaying = true;
+    warpFactor = 1;
+    introStartTime = performance.now();
+    document.body.classList.add('intro-active');
+
+    // Hide website completely during intro
+    if (portfolioRoot) {
+      portfolioRoot.classList.remove('visible');
+      portfolioRoot.style.display = 'none';
+    }
+
+    if (ytIntroStage) {
+      ytIntroStage.style.display = 'flex';
+      ytIntroStage.classList.remove('exit');
+    }
+
+    if (ytWarpFlash) ytWarpFlash.classList.remove('flash');
+
+    // Reset scene states
+    [ytScene1, ytScene2, ytScene3].forEach(s => s && s.classList.remove('active'));
+    [kCard1, kCard2, kCard3].forEach(c => c && c.classList.remove('show'));
+
+    // Scene 1: Initializing & Radar Boot (0s - 1.3s)
+    if (ytScene1) ytScene1.classList.add('active');
+
+    // Scene 2: 1.3s - Epic 3D Glitch Title Slam & 808 Bass Impact
+    schedule(() => {
+      initAudio();
+      if (ytScene1) ytScene1.classList.remove('active');
+      if (ytScene2) ytScene2.classList.add('active');
+      warpFactor = 2.2;
+      playBassDrop();
+      playLaserZap();
+    }, 1300);
+
+    // Scene 3: 3.4s - Kinetic Fast-Cut Feature Reel
+    schedule(() => {
+      if (ytScene2) ytScene2.classList.remove('active');
+      if (ytScene3) ytScene3.classList.add('active');
+      warpFactor = 3.0;
+
+      schedule(() => { if (kCard1) kCard1.classList.add('show'); playCardWhoosh(380); }, 100);
+      schedule(() => { if (kCard2) kCard2.classList.add('show'); playCardWhoosh(480); }, 650);
+      schedule(() => { if (kCard3) kCard3.classList.add('show'); playCardWhoosh(580); }, 1200);
+    }, 3400);
+
+    // Scene 4: 5.3s - Hyperspace Supernova Warp Finale
+    schedule(() => {
+      warpFactor = 8.5;
+      playWarpSonic();
+      if (ytWarpFlash) ytWarpFlash.classList.add('flash');
+    }, 5300);
+
+    // 6.2s: Seamless Transition into full interactive website!
+    schedule(() => {
+      completeIntro();
+    }, 6200);
+  };
+
+  // Sound Toggle
+  if (ytAudioToggleBtn) {
+    ytAudioToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      initAudio();
+      audioEnabled = !audioEnabled;
+      if (ytAudioIcon && ytAudioLabel) {
+        if (audioEnabled) {
+          ytAudioIcon.className = 'fa-solid fa-volume-high';
+          ytAudioLabel.textContent = 'SOUND: ON';
+        } else {
+          ytAudioIcon.className = 'fa-solid fa-volume-xmark';
+          ytAudioLabel.textContent = 'SOUND: OFF';
+        }
+      }
+    });
+  }
+
+  // Skip Button
+  if (ytSkipBtn) {
+    ytSkipBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      completeIntro();
+    });
+  }
+
+  // Keyboard Skip
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isIntroPlaying) {
+      completeIntro();
+    }
+  });
+
+  // Enable audio on first click anywhere
+  window.addEventListener('click', () => {
+    initAudio();
+    if (ytSoundHint) ytSoundHint.style.opacity = '0';
+  }, { once: true });
+
+  // Replay Triggers
+  if (navReplayYtIntroBtn) navReplayYtIntroBtn.addEventListener('click', playIntroSequence);
+  if (footerReplayYtIntroBtn) footerReplayYtIntroBtn.addEventListener('click', playIntroSequence);
+  if (heroPlayIntroBtn) heroPlayIntroBtn.addEventListener('click', playIntroSequence);
+
+  // Auto-launch intro sequence on load!
+  playIntroSequence();
 });
 
 </script>
