@@ -2067,12 +2067,400 @@ input:focus-visible {
   }
   .glow-orb {
     animation: none;
-  }
+/* --------------------------------------------------
+   17. Cyber Introduction Portal / Welcome Splash Screen
+   -------------------------------------------------- */
+.intro-portal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: radial-gradient(circle at 50% 40%, #0d172e 0%, #060913 75%, #03050a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow: hidden;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
+              filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.intro-portal.exit {
+  opacity: 0;
+  transform: scale(1.1) translateY(-20px);
+  filter: blur(14px);
+  pointer-events: none;
+}
+
+.intro-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-size: 44px 44px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+  opacity: 0.65;
+  pointer-events: none;
+  animation: gridPan 25s linear infinite;
+}
+
+@keyframes gridPan {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(44px, 44px); }
+}
+
+.intro-glow-sphere {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.18) 0%, rgba(0, 229, 153, 0.08) 45%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  animation: spherePulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes spherePulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.15); opacity: 0.95; }
+}
+
+.intro-card {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  background: rgba(13, 21, 39, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 1.25rem;
+  box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.9), 0 0 45px rgba(0, 240, 255, 0.2);
+  padding: 2.25rem;
+  text-align: center;
+  animation: introCardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+@keyframes introCardEntrance {
+  0% { opacity: 0; transform: perspective(1000px) rotateX(15deg) translateY(40px) scale(0.92); }
+  100% { opacity: 1; transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1); }
+}
+
+.intro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 1.25rem;
+}
+
+.intro-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 10px var(--accent-cyan);
+  animation: pulseCyan 1.5s infinite;
+}
+
+.intro-brand-code {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--accent-cyan);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+}
+
+.intro-name {
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #ffffff 30%, #00f0ff 70%, #00e599 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.intro-role {
+  font-size: 1.05rem;
+  color: var(--accent-teal);
+  font-weight: 600;
+  font-family: var(--font-mono);
+  margin-bottom: 0.25rem;
+}
+
+.intro-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* Terminal Log Simulation */
+.intro-terminal-box {
+  background: #080d19;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  margin-bottom: 1.35rem;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.intro-term-header {
+  background: #101625;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.45rem 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.intro-term-title {
+  margin-left: 0.5rem;
+  color: var(--text-dim);
+  font-size: 0.72rem;
+}
+
+.intro-term-body {
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-height: 100px;
+}
+
+.intro-log {
+  color: var(--text-muted);
+  opacity: 0.35;
+  transition: opacity 0.25s ease, color 0.25s ease;
+}
+
+.intro-log.active {
+  opacity: 1;
+  color: var(--text-main);
+}
+
+.intro-log.highlight {
+  color: var(--accent-teal);
+  font-weight: 600;
+}
+
+/* Progress bar */
+.intro-progress-bar-container {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 0.45rem;
+}
+
+.intro-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #00f0ff 0%, #00e599 100%);
+  box-shadow: 0 0 12px var(--accent-cyan);
+  transition: width 0.15s ease-out;
+}
+
+.intro-status-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+}
+
+.intro-status-row span:first-child {
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+/* Actions */
+.intro-actions {
+  display: flex;
+  gap: 0.85rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.intro-enter-btn {
+  background: linear-gradient(135deg, #00f0ff 0%, #00e599 100%);
+  color: #050b14;
+  border: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.65rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
+  transition: all var(--trans-norm);
+}
+
+.intro-enter-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.55);
+}
+
+.intro-enter-btn.ready-pulse {
+  animation: enterBtnGlow 1.8s infinite;
+}
+
+@keyframes enterBtnGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.4); transform: scale(1); }
+  50% { box-shadow: 0 0 35px rgba(0, 229, 153, 0.65); transform: scale(1.02); }
+}
+
+.intro-contact-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass-bright);
+  color: var(--text-main);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.8rem 1.25rem;
+  border-radius: 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--trans-fast);
+}
+
+.intro-contact-btn:hover {
+  background: rgba(0, 240, 255, 0.12);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  transform: translateY(-2px);
+}
+
+.intro-quick-socials {
+  display: flex;
+  justify-content: center;
+  gap: 1.15rem;
+}
+
+.intro-quick-socials a {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  transition: all var(--trans-fast);
+}
+
+.intro-quick-socials a:hover {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  transform: translateY(-2px);
+}
+
+.replay-intro-btn {
+  background: none;
+  border: 1px solid var(--border-glass);
+  color: var(--text-dim);
+  padding: 0.25rem 0.65rem;
+  border-radius: 0.4rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all var(--trans-fast);
+}
+
+.replay-intro-btn:hover {
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+  background: rgba(0, 240, 255, 0.06);
 }
 
 </style>
 </head>
 <body>
+  <!-- 🚀 Futuristic Cyber Entrance / Intro Portal Screen -->
+  <div id="introPortal" class="intro-portal" role="dialog" aria-modal="true" aria-label="Welcome Portal">
+    <div class="intro-grid-bg"></div>
+    <div class="intro-glow-sphere"></div>
+
+    <div class="intro-card">
+      <div class="intro-badge">
+        <span class="intro-pulse"></span>
+        <span>SECURITY PROTOCOL: VERIFIED // WELCOME</span>
+      </div>
+
+      <div class="intro-terminal-glitch">
+        <div class="intro-brand-code">&lt;NJ /&gt;</div>
+        <h1 class="intro-name">NISCHAY JAIN</h1>
+        <p class="intro-role">Cybersecurity Enthusiast &bull; Competitive Programmer</p>
+        <p class="intro-sub">Newton School of Technology &bull; Rishihood University</p>
+      </div>
+
+      <div class="intro-terminal-box">
+        <div class="intro-term-header">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+          <span class="intro-term-title">boot_sequence.sh</span>
+        </div>
+        <div class="intro-term-body">
+          <div class="intro-log" id="introLogLine1">&gt; Initializing algorithmic core...</div>
+          <div class="intro-log" id="introLogLine2">&gt; Syncing Codeforces stats (@insaneNischay)...</div>
+          <div class="intro-log" id="introLogLine3">&gt; Arming CTF defense vectors & picoGym...</div>
+          <div class="intro-log highlight" id="introLogLine4">&gt; [STATUS: READY] Welcome to my portfolio universe.</div>
+        </div>
+      </div>
+
+      <div class="intro-progress-bar-container">
+        <div class="intro-progress-bar" id="introProgressBar"></div>
+      </div>
+      <div class="intro-status-row">
+        <span id="introPercent">0%</span>
+        <span>SYSTEM ONLINE // CLICK BELOW TO ENTER</span>
+      </div>
+
+      <div class="intro-actions">
+        <button id="enterPortfolioBtn" class="intro-enter-btn" type="button">
+          <span>ENTER PORTFOLIO</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <a href="mailto:jainnischay66@gmail.com" class="intro-contact-btn">
+          <i class="fa-regular fa-paper-plane"></i> Quick Hire / Contact
+        </a>
+      </div>
+
+      <div class="intro-quick-socials">
+        <a href="https://github.com/jainnischay66-ops" target="_blank" rel="noopener" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://codeforces.com/profile/insaneNischay" target="_blank" rel="noopener" title="Codeforces"><i class="fa-solid fa-chart-simple"></i></a>
+        <a href="https://www.linkedin.com/in/nischay-jain-20b5aa40b" target="_blank" rel="noopener" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:jainnischay66@gmail.com" title="Email"><i class="fa-regular fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
   <!-- Ambient background glow elements -->
   <div class="glow-bg">
     <div class="glow-orb orb-1"></div>
@@ -2822,7 +3210,10 @@ input:focus-visible {
       </div>
 
       <div class="footer-copy">
-        &copy; 2024–2026 Nischay Jain. Crafted with modern HTML5 & CSS3.
+        <span>&copy; 2024–2026 Nischay Jain. Crafted with modern HTML5 & CSS3.</span>
+        <button id="replayIntroBtn" class="replay-intro-btn" type="button" title="Watch introductory cyber portal again">
+          <i class="fa-solid fa-rotate-right"></i> Replay Intro
+        </button>
       </div>
     </div>
   </footer>
@@ -3413,6 +3804,125 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // =========================================================================
+  // 10. Futuristic Cyber Entrance / Intro Portal Controller
+  // =========================================================================
+  const introPortal = document.getElementById('introPortal');
+  const enterBtn = document.getElementById('enterPortfolioBtn');
+  const progressBar = document.getElementById('introProgressBar');
+  const percentText = document.getElementById('introPercent');
+  const log1 = document.getElementById('introLogLine1');
+  const log2 = document.getElementById('introLogLine2');
+  const log3 = document.getElementById('introLogLine3');
+  const log4 = document.getElementById('introLogLine4');
+  const replayIntroBtn = document.getElementById('replayIntroBtn');
+
+  // Synthesize futuristic cyber audio feedback via Web Audio API
+  const playCyberChime = (highPitch = false) => {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      const now = ctx.currentTime;
+      osc.type = highPitch ? 'triangle' : 'sine';
+      osc.frequency.setValueAtTime(highPitch ? 587.33 : 329.63, now);
+      osc.frequency.exponentialRampToValueAtTime(highPitch ? 880 : 659.25, now + 0.28);
+
+      gain.gain.setValueAtTime(0.06, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.35);
+    } catch (e) {}
+  };
+
+  if (introPortal && progressBar && percentText) {
+    let progress = 0;
+    let isEntered = false;
+
+    // Animate progress loading sequence
+    const loadInterval = setInterval(() => {
+      progress += Math.floor(Math.random() * 8) + 4;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(loadInterval);
+
+        if (enterBtn) {
+          enterBtn.classList.add('ready-pulse');
+        }
+      }
+
+      progressBar.style.width = `${progress}%`;
+      percentText.textContent = `${progress}%`;
+
+      if (progress >= 20 && log1) log1.classList.add('active');
+      if (progress >= 50 && log2) log2.classList.add('active');
+      if (progress >= 75 && log3) log3.classList.add('active');
+      if (progress >= 100 && log4) {
+        log4.classList.add('active');
+        playCyberChime(false);
+      }
+    }, 45);
+
+    const closeIntroPortal = () => {
+      if (isEntered) return;
+      isEntered = true;
+      playCyberChime(true);
+      introPortal.classList.add('exit');
+
+      setTimeout(() => {
+        introPortal.style.display = 'none';
+      }, 750);
+    };
+
+    if (enterBtn) {
+      enterBtn.addEventListener('click', closeIntroPortal);
+    }
+
+    // Allow Enter / Space key to enter
+    window.addEventListener('keydown', (e) => {
+      if ((e.key === 'Enter' || e.code === 'Space') && !isEntered) {
+        if (document.activeElement?.tagName !== 'INPUT') {
+          closeIntroPortal();
+        }
+      }
+    });
+
+    // Replay intro portal from footer
+    if (replayIntroBtn) {
+      replayIntroBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        isEntered = false;
+        introPortal.style.display = 'flex';
+        introPortal.classList.remove('exit');
+        progress = 0;
+        progressBar.style.width = '0%';
+        percentText.textContent = '0%';
+        [log1, log2, log3, log4].forEach(l => l && l.classList.remove('active'));
+
+        const replayInterval = setInterval(() => {
+          progress += 8;
+          if (progress >= 100) {
+            progress = 100;
+            clearInterval(replayInterval);
+            playCyberChime(false);
+          }
+          progressBar.style.width = `${progress}%`;
+          percentText.textContent = `${progress}%`;
+          if (progress >= 25 && log1) log1.classList.add('active');
+          if (progress >= 50 && log2) log2.classList.add('active');
+          if (progress >= 75 && log3) log3.classList.add('active');
+          if (progress >= 100 && log4) log4.classList.add('active');
+        }, 35);
+      });
+    }
+  }
 });
 
 </script>
